@@ -1,10 +1,15 @@
 import React from 'react';
 import { render } from 'react-dom';
-import Header from './components/header.js';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import todoApp from './reducers/todoApp';
+import App from './components/app';
+
+let store = createStore(todoApp)
 
 render (
-    <div>
-    <Header/>
-    </div>,
+    <Provider store={store}>
+    <App/>
+    </Provider>,
         document.getElementById('root')
 );

@@ -1,12 +1,34 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import addTodo from '../actions/addTodo';
+ 
+let Header = ({ dispatch }) => {
 
-export default class Header extends React.Component {
-    render() {
-        return(
-            <header>
-            <h1>Todos</h1>
-            <input placeholder="What needs to be done?"/>
-            </header>
-        );
+    let textInput = null;
+
+    function handleNewTodoKeyDown(event) {
+     if (event.keyCode !== 13) {
+				return;
+			}
+      event.preventDefault();
+
+      if(textInput === null || !textInput.value.trim()) {
+        return;
+      }
+
+      dispatch(addTodo(textInput.value));
+      textInput.value = '';
     }
-}
+
+        return(
+            <div>
+        <input ref={node => {
+          textInput = node
+        }} onKeyDown={handleNewTodoKeyDown}/>
+    </div>
+        )
+    }
+
+Header = connect()(Header)
+
+export default Header
