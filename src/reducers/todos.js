@@ -8,6 +8,16 @@ const todos = (state = [], action) => {
           text: action.text
         }
       ]
+      case 'DELETE_TODO':
+       for (let i=0; i<state.length; i++) {
+                if (state[i].id == action.id) {
+                    return [
+                        ...state.slice(0, i),
+                        ...state.slice(i+1)
+                    ];
+                }
+            }
+            return state;
     default:
       return state
   }
