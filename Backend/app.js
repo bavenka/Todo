@@ -32,7 +32,7 @@ mongoose.connect('mongodb://localhost/test');
 var db = mongoose.connection;
 
 db.on('error', function (err) {
-    console.error('connection error:', err.message);
+    console.error('Connection error(DB):', err.message);
 });
 db.once('open', function callback() {
     console.info("Connected to DB!");
