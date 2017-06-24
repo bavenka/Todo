@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import addTodo from '../actions/addTodo';
+import addTodo from '../actions/addTodo'
+import CompleteAll from '../containers/completeAll'
 
 let Header = ({dispatch}) => {
 
@@ -22,6 +23,7 @@ let Header = ({dispatch}) => {
 
     return (
         <div>
+            <CompleteAll/>
             <input ref={node => {
                 textInput = node
             }} onKeyDown={handleNewTodoKeyDown}/>
