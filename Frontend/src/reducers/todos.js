@@ -1,12 +1,29 @@
+const todo = (state, action) => {
+    switch (action.type) {
+        case 'ADD_TODO':
+            return {
+                id: action.id,
+                text: action.text,
+                completed: false
+            };
+        case 'COMPLETE_TODO':
+            if (state.id !== action.id) {
+                return state
+            }
+            return Object.assign({}, state, {
+                completed: !state.completed
+            });
+        default:
+            return state
+    }
+};
+
 const todos = (state = [], action) => {
     switch (action.type) {
         case 'ADD_TODO':
             return [
                 ...state,
-                {
-                    id: action.id,
-                    text: action.text
-                }
+                todo(undefined, action)
             ];
         case 'DELETE_TODO':
             for (let i = 0; i < state.length; i++) {
@@ -18,6 +35,10 @@ const todos = (state = [], action) => {
                 }
             }
             return state;
+        case 'COMPLETE_TODO':
+            return state.map(t =>
+                todo(t, action)
+            );
         default:
             return state
     }

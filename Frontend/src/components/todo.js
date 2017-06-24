@@ -1,10 +1,10 @@
 import React from 'react';
-import deleteTodo from '../actions/deleteTodo';
-import {connect} from 'react-redux';
 
-const Todo = ({text, onClick}) => (
-    <li>{text}
-        <button onClick={onClick}>x</button>
+const Todo = ({text, onDeleteClick, onCompleteClick, completed}) => (
+    <li style={{textDecoration: completed ? 'line-through' : 'none'}}>
+        <input type="checkbox" onClick={onCompleteClick}/>
+        {text}
+        <button onClick={onDeleteClick}>x</button>
     </li>
 );
 
