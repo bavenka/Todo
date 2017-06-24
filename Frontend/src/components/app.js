@@ -4,9 +4,9 @@ import VisibleTodoList from '../containers/VisibleTodoList';
 
 const App = () => (
     <div>
-    <Header/>
-    <VisibleTodoList/>
+        <Header/>
+        <VisibleTodoList/>
     </div>
-)
+);
 
 export default App
