@@ -1,31 +1,13 @@
-const todo = (state, action) => {
-    switch (action.type) {
-        case 'ADD_TODO':
-            return {
-                id: action.id,
-                text: action.text,
-                completed: false
-            };
-        case 'COMPLETE_TODO':
-            if (state.id !== action.id) {
-                return state
-            }
-            return Object.assign({}, state, {
-                completed: !state.completed
-            });
-        default:
-            return state
-    }
-};
+import {ADD_TODO, DELETE_TODO, COMPLETE_ALL} from '../constants/ActionTypes'
 
 const todos = (state = [], action) => {
     switch (action.type) {
-        case 'ADD_TODO':
+        case ADD_TODO:
             return [
                 ...state,
                 todo(undefined, action)
             ];
-        case 'DELETE_TODO':
+        case DELETE_TODO:
             for (let i = 0; i < state.length; i++) {
                 if (state[i].id === action.id) {
                     return [
@@ -39,6 +21,9 @@ const todos = (state = [], action) => {
             return state.map(t =>
                 todo(t, action)
             );
+        case COMPLETE_ALL:
+            const areAllMarked = state.every(todo => todo.completed);
+            return state.map(todo => (Object.assign({}, todo, {completed: !areAllMarked})));
         default:
             return state
     }

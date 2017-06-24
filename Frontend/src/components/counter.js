@@ -12,6 +12,7 @@ const Counter = ({todos}) => (
         {count = countTodos(todos)}
         {' '}
         { count === 1 ? 'item' : 'items'}
+        {' left'}
     </strong>
 );
 
