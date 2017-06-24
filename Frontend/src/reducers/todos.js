@@ -1,6 +1,8 @@
+import {ADD_TODO, DELETE_TODO} from '../constants/ActionTypes'
+
 const todos = (state = [], action) => {
     switch (action.type) {
-        case 'ADD_TODO':
+        case ADD_TODO:
             return [
                 ...state,
                 {
@@ -8,7 +10,7 @@ const todos = (state = [], action) => {
                     text: action.text
                 }
             ];
-        case 'DELETE_TODO':
+        case DELETE_TODO:
             for (let i = 0; i < state.length; i++) {
                 if (state[i].id === action.id) {
                     return [
