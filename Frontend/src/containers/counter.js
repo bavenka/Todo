@@ -1,14 +1,15 @@
 import {connect} from 'react-redux';
-import Cou from '../components/counter';
+import CounterComponent from '../components/counter';
 
 const mapStateToProps = (state) => {
     return {
-        todos: state.todos
+        countUnfinishedTodos: state.todos.reduce((count, todo) =>
+            !todo.completed ? count + 1 : count, 0)
     }
 };
 
 const Counter = connect(
     mapStateToProps
-)(Cou);
+)(CounterComponent);
 
 export default Counter
