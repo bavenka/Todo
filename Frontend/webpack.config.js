@@ -8,7 +8,8 @@ module.exports = {
     },
     module: {
         rules: [
-            { test: /\.js$/, exclude: /node_modules/, loaders: ["react-hot-loader", "babel-loader"] }
+            { test: /\.js$/, exclude: /node_modules/, loaders: ["react-hot-loader", "babel-loader"]}
         ]
-    }
+    },
+    devtool: "source-map"
 };
