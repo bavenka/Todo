@@ -1,7 +1,7 @@
 import React from 'react';
 
-const CompleteAll = ({onCompleteAllClick}) => (
-    <button onClick={onCompleteAllClick}>Mark all as complete</button>
+const CompleteAll = ({check, onCompleteAllClick}) => (
+    <input type="checkbox" checked={check} onClick={onCompleteAllClick}/>
 );
 
 export default CompleteAll
