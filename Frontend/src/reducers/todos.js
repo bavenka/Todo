@@ -7,7 +7,8 @@ const todos = (state = [], action) => {
                 ...state,
                 {
                     id: action.id,
-                    text: action.text
+                    text: action.text,
+                    completed: true //TODO поменять на false
                 }
             ];
         case DELETE_TODO:
