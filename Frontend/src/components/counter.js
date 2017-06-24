@@ -1,15 +1,15 @@
 import React from 'react'
 
-const countTodos = (todos) => {
+const countUnfinishedTodos = (todos) => {
     return todos.reduce((count, todo) =>
-        todo.completed ? count + 1 : count, 0);
+        !todo.completed ? count + 1 : count, 0);
 };
 
 let count;
 
 const Counter = ({todos}) => (
     <strong>
-        {count = countTodos(todos)}
+        {count = countUnfinishedTodos(todos)}
         {' '}
         { count === 1 ? 'item' : 'items'}
         {' left'}
