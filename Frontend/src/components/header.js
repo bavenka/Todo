@@ -25,7 +25,8 @@ let Header = ({dispatch}) => {
         <div>
             <CompleteAll/>
             <input ref={node => {
-                textInput = node && node.focus()
+                textInput = node;
+                node.focus()
             }} onKeyDown={handleNewTodoKeyDown}/>
         </div>
     )
