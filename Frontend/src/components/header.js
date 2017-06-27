@@ -1,15 +1,15 @@
 import React from 'react';
-import TodoTextInputContainer from '../containers/todoTextInput'
-import CompleteAll from '../containers/completeAll'
 
-const Header = () => {
+class Header extends React.Component {
 
-    return (
-        <div>
-            <CompleteAll/>
-            <TodoTextInputContainer/>
-        </div>
-    )
-};
+    render() {
+
+        return (
+            <header>
+                <h1>Todos</h1>
+            </header>
+        )
+    }
+}
 
 export default Header
