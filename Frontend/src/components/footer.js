@@ -6,8 +6,7 @@ const Footer = () => (
     <div>
         <Counter/>
         <p>
-            Show:
-            {" "}
+            {"Show: "}
             <FilterLink filter="ALL">
                 All
             </FilterLink>
