@@ -1,4 +1,10 @@
-import {ADD_TODO, DELETE_TODO, COMPLETE_TODO, COMPLETE_ALL} from '../constants/ActionTypes'
+import {
+    ADD_TODO,
+    DELETE_TODO,
+    COMPLETE_TODO,
+    COMPLETE_ALL,
+    CLEAR_COMPLETED
+} from '../constants/ActionTypes'
 
 const todos = (state = [], action) => {
     switch (action.type) {
@@ -21,6 +27,8 @@ const todos = (state = [], action) => {
         case COMPLETE_ALL:
             const areAllMarked = state.every(todo => todo.completed);
             return state.map(todo => (Object.assign({}, todo, {completed: !areAllMarked})));
+        case CLEAR_COMPLETED:
+            return state.filter(todo => !todo.completed);
         default:
             return state
     }
