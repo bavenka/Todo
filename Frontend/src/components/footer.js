@@ -1,6 +1,7 @@
 import React from 'react'
 import Counter from '../containers/counter'
 import FilterLink from '../containers/FilterLink'
+import ClearCompleted from  '../containers/clearCompleted'
 
 const Footer = () => (
     <div>
@@ -19,6 +20,7 @@ const Footer = () => (
                 Completed
             </FilterLink>
         </p>
+        <ClearCompleted/>
     </div>
 );
 
