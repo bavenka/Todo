@@ -12,7 +12,6 @@ const mapDispatchToProps = {
     onCompleteAllClick: completeAll
 };
 
-
 const CompleteAll = connect(
     mapStateToProps,
     mapDispatchToProps
