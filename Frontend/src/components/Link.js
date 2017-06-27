@@ -7,7 +7,7 @@ const Link = ({active, children, onClick}) => {
     }
 
     return (
-        <a href="#" onClick={onClick()}>
+        <a href="#" onClick={onClick}>
             {children}
         </a>
     )
