@@ -30,7 +30,8 @@ class Todo extends React.Component {
 
         if (this.state.editing) {
             element = (
-                <TodoTextInput onSave={(text) => this.onSave(this.props.id, text)}/>
+                <TodoTextInput text ={this.props.text}
+                    onSave={(text) => this.onSave(this.props.id, text)}/>
             )
         } else {
             element = (
