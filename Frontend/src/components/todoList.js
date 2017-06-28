@@ -13,6 +13,8 @@ class TodoList extends React.Component {
                           }
                           onCompleteClick={() => this.props.onCompleteClick(todo.id)
                           }
+                          onEditClick={() => this.props.onEditClick(todo.id, todo.text)
+                          }
                     />
                 )}
             </ul>)
