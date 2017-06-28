@@ -7,6 +7,7 @@ class TodoTextInput extends React.Component {
         this.state = {text: this.props.text || ''};
         this.onKeyDown = this.onKeyDown.bind(this);
         this.onChange = this.onChange.bind(this);
+        this.onBlur = this.onBlur.bind(this);
     }
 
     onKeyDown(event) {
@@ -15,15 +16,18 @@ class TodoTextInput extends React.Component {
         }
         event.preventDefault();
         const text = event.target.value.trim();
-        if (!text) {
-            return;
-        }
         this.props.onSave(text);
         this.setState({text: ''});
     }
 
     onChange(event) {
         this.setState({text: event.target.value})
+    }
+
+    onBlur (event) {
+        if(this.props.editing) {
+            this.props.onSave(event.target.value)
+        }
     }
 
     render() {
@@ -35,6 +39,7 @@ class TodoTextInput extends React.Component {
                    value={this.state.text}
                    placeholder={this.props.placeholder}
                    onKeyDown={this.onKeyDown}
+                   onBlur={this.onBlur}
             />
         )
     }
