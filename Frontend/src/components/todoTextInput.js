@@ -5,8 +5,8 @@ class TodoTextInput extends React.Component {
     constructor(props) {
         super(props);
         this.state = {text: this.props.text || ''};
-        this.onKeyDown=this.onKeyDown.bind(this);
-        this.onChange=this.onChange.bind(this);
+        this.onKeyDown = this.onKeyDown.bind(this);
+        this.onChange = this.onChange.bind(this);
     }
 
     onKeyDown(event) {
@@ -19,11 +19,11 @@ class TodoTextInput extends React.Component {
             return;
         }
         this.props.onSave(text);
-      //  this.setState({text: ''});
+        this.setState({text: ''});
     }
 
-    onChange (event) {
-        this.setState({ text: event.target.value })
+    onChange(event) {
+        this.setState({text: event.target.value})
     }
 
     render() {
