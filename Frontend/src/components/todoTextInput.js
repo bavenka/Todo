@@ -6,6 +6,7 @@ class TodoTextInput extends React.Component {
         super(props);
         this.state = {text: this.props.text || ''};
         this.onKeyDown=this.onKeyDown.bind(this);
+        this.onChange=this.onChange.bind(this);
     }
 
     onKeyDown(event) {
@@ -17,15 +18,22 @@ class TodoTextInput extends React.Component {
         if (!text) {
             return;
         }
-        this.props.onAddClick(text);
+        this.props.onSave(text);
         this.setState({text: ''});
     }
 
+    onChange (event) {
+        this.setState({ text: event.target.value })
+    }
+
     render() {
+        console.log(this.props);
         return (
             <input type="text"
                    autoFocus="true"
-                   placeholder={this.placeholder}
+                   onChange={this.onChange}
+                   value={this.state.text}
+                   placeholder={this.props.placeholder}
                    onKeyDown={this.onKeyDown}
             />
         )

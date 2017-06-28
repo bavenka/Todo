@@ -1,18 +1,20 @@
 import {connect} from 'react-redux';
-import TodoTextInput from '../components/todoTextInput';
+import Header from '../components/header';
 import addTodo from '../actions/addTodo';
 
 const mapDispatchToProps = (dispatch) => {
     return {
         onAddClick: (text) => {
-            dispatch(addTodo(text))
+            if (text.length !== 0) {
+                dispatch(addTodo(text))
+            }
         }
     }
 };
 
-const TodoTextInputContainer = connect(
+const HeaderContainer = connect(
     null,
     mapDispatchToProps
-)(TodoTextInput);
+)(Header);
 
-export default TodoTextInputContainer
+export default HeaderContainer
