@@ -8,6 +8,7 @@ class Todo extends React.Component {
         super(props);
         this.state = {editing: false};
         this.onDoubleClick=this.onDoubleClick.bind(this);
+        this.onSave=this.onSave.bind(this);
     }
 
     onDoubleClick() {
@@ -29,7 +30,7 @@ class Todo extends React.Component {
 
         if (this.state.editing) {
             element = (
-                <TodoTextInput onSave={(text) => this.onSave(this.props.id, this.props.text)}/>
+                <TodoTextInput onSave={(text) => this.onSave(this.props.id, text)}/>
             )
         } else {
             element = (

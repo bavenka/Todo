@@ -19,7 +19,7 @@ class TodoTextInput extends React.Component {
             return;
         }
         this.props.onSave(text);
-        this.setState({text: ''});
+      //  this.setState({text: ''});
     }
 
     onChange (event) {

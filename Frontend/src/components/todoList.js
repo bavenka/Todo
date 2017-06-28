@@ -4,6 +4,7 @@ import Todo from './todo';
 class TodoList extends React.Component {
 
     render() {
+        console.log(this.params);
         return (
             <ul>
                 {this.props.todos.map((todo) =>
@@ -13,7 +14,7 @@ class TodoList extends React.Component {
                           }
                           onCompleteClick={() => this.props.onCompleteClick(todo.id)
                           }
-                          onEditClick={() => this.props.onEditClick(todo.id, todo.text)
+                          onEditClick={(id, text) => this.props.onEditClick(todo.id, text)
                           }
                     />
                 )}
