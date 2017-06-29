@@ -1,8 +1,9 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import TodoTextInput from '../components/todoTextInput'
 class Header extends React.Component {
 
     render() {
+        console.log(this.props);
         return (
             <header>
                 <h1>Todos</h1>
@@ -12,5 +13,9 @@ class Header extends React.Component {
         )
     }
 }
+
+Header.propTypes = {
+    onAddClick: PropTypes.func.isRequired
+};
 
 export default Header

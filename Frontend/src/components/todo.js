@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import Complete from './complete'
 import TodoTextInput from "./todoTextInput";
 
@@ -25,7 +25,6 @@ class Todo extends React.Component {
     }
 
     render() {
-
         let element;
 
         if (this.state.editing) {
@@ -54,5 +53,15 @@ class Todo extends React.Component {
         )
     }
 }
+
+Todo.propTypes = {
+    id:PropTypes.number.isRequired,
+    text:PropTypes.string.isRequired,
+    completed: PropTypes.bool.isRequired,
+    onEditClick: PropTypes.func.isRequired,
+    onDeleteClick: PropTypes.func.isRequired,
+    onCompleteAllClick: PropTypes.func,
+    onCompleteClick: PropTypes.func.isRequired
+};
 
 export default Todo

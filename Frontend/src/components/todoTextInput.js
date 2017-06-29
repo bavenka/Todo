@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{PropTypes} from 'react';
 
 class TodoTextInput extends React.Component {
 
@@ -31,7 +31,6 @@ class TodoTextInput extends React.Component {
     }
 
     render() {
-        console.log(this.props);
         return (
             <input type="text"
                    autoFocus="true"
@@ -44,4 +43,12 @@ class TodoTextInput extends React.Component {
         )
     }
 }
+
+TodoTextInput.propTypes = {
+    onSave: PropTypes.func.isRequired,
+    text: PropTypes.string,
+    editing: PropTypes.bool,
+    placeholder:PropTypes.string,
+};
+
 export default TodoTextInput

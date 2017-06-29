@@ -1,10 +1,9 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import Todo from './todo';
 
 class TodoList extends React.Component {
 
     render() {
-        console.log(this.params);
         return (
             <ul>
                 {this.props.todos.map((todo) =>
@@ -21,5 +20,12 @@ class TodoList extends React.Component {
             </ul>)
     }
 }
+
+TodoList.propTypes = {
+    todos:PropTypes.array.isRequired,
+    onEditClick: PropTypes.func.isRequired,
+    onDeleteClick: PropTypes.func.isRequired,
+    onCompleteClick: PropTypes.func.isRequired
+};
 
 export default TodoList
