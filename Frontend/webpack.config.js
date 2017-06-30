@@ -6,7 +6,8 @@ module.exports = {
     entry: path.resolve(__dirname, 'src', 'index.js'),
     output: {
         path: path.resolve(__dirname, './dist'),
-        filename: 'bundle.js'
+        filename: 'bundle.js',
+        publicPath: '/'
     },
     module: {
         rules: [
@@ -23,6 +24,9 @@ module.exports = {
                 })
             }
         ]
+    },
+    devServer: {
+        historyApiFallback: true
     },
     devtool: "source-map",
     plugins: [
