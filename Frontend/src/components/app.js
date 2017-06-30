@@ -4,11 +4,11 @@ import CompleteAll from '../containers/completeAll'
 import Footer from './footer'
 import Header from "../containers/header";
 
-const App = () => (
+const App = ({match}) => (
     <div>
         <Header/>
         <CompleteAll/>
-        <VisibleTodoList/>
+        <VisibleTodoList filter = {match.params.filter || 'all'}/>
         <Footer/>
     </div>
 );

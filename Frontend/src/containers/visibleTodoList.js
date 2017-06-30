@@ -6,20 +6,20 @@ import editTodo from '../actions/editTodo';
 
 const getTodos = (todos, filter) => {
     switch (filter) {
-        case 'ALL':
+        case 'all':
             return todos;
-        case 'COMPLETED':
+        case 'completed':
             return todos.filter(t => t.completed);
-        case 'ACTIVE':
+        case 'active':
             return todos.filter(t => !t.completed);
         default:
             throw new Error('Unknown filter: ' + filter)
     }
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
     return {
-        todos: getTodos(state.todos, state.visibilityFilter)
+        todos: getTodos(state.todos, ownProps.filter)
     }
 };
 
