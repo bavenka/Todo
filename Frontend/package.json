@@ -15,7 +15,10 @@
     "react": "^15.6.0",
     "react-dom": "^15.6.0",
     "react-redux": "^5.0.5",
+    "react-router-dom": "^4.1.1",
     "redux": "^3.7.0",
+    "redux-devtools-extension": "^2.13.2",
+    "redux-thunk": "^2.2.0",
     "style-loader": "^0.18.2"
   },
   "devDependencies": {
