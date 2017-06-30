@@ -19,7 +19,7 @@ module.exports = {
                 test: /\.css$/,
                 use: ExtractTextPlugin.extract({
                     fallback: "style-loader",
-                    use: "css-loader"
+                    use: ['css-loader?modules,localIdentName="[name]-[local]-[hash:base64:6]"']
                 })
             }
         ]
