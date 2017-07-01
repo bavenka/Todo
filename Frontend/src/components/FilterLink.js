@@ -1,22 +1,24 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import {Link} from 'react-router-dom'
 
-const Link = ({active, children, onClick}) => {
+const FilterLink = ({filter, active, children, onClick}) => {
     if (active) {
         return <span>{children}</span>
     }
 
     return (
-        <a href="#" onClick={onClick}>
+
+        <Link to={filter === 'all' ? '' : filter} onClick={onClick}>
             {children}
-        </a>
+        </Link>
     )
 };
 
-Link.propTypes = {
+FilterLink.propTypes = {
     active: PropTypes.bool.isRequired,
     children: PropTypes.node.isRequired,
     onClick: PropTypes.func.isRequired
 };
 
-export default Link
+export default FilterLink

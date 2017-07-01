@@ -29,6 +29,11 @@ const todos = (state = [], action) => {
             return state.map(todo => (Object.assign({}, todo, {completed: !areAllMarked})));
         case CLEAR_COMPLETED:
             return state.filter(todo => !todo.completed);
+        case EDIT_TODO:
+            return state.map(todo =>
+                todo.id === action.id ?
+                    {...todo, text: action.text} : todo
+            );
         default:
             return state
     }

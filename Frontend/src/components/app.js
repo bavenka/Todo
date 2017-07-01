@@ -1,16 +1,14 @@
 import React from 'react';
-import Header from './header';
 import VisibleTodoList from '../containers/VisibleTodoList';
 import CompleteAll from '../containers/completeAll'
 import Footer from './footer'
-import TodoTextInputContainer from "../containers/todoTextInput";
+import Header from "../containers/header";
 
-const App = () => (
+const App = ({match}) => (
     <div>
         <Header/>
         <CompleteAll/>
-        <TodoTextInputContainer/>
-        <VisibleTodoList/>
+        <VisibleTodoList filter = {match.params.filter || 'all'}/>
         <Footer/>
     </div>
 );

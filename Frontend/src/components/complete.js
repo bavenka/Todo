@@ -1,7 +1,17 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 
-const Complete = ({completed, onCompleteClick}) => (
-    <input type="checkbox" checked={completed} onChange={onCompleteClick}/>
-);
+class Complete extends React.Component {
+
+    render() {
+        return (
+            <input type="checkbox" checked={this.props.completed} onClick={this.props.onCompleteClick}/>
+        )
+    }
+}
+
+Complete.propTypes = {
+    completed: PropTypes.bool.isRequired,
+    onCompleteClick: PropTypes.func.isRequired,
+};
 
 export default Complete
