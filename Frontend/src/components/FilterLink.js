@@ -9,7 +9,7 @@ const FilterLink = ({filter, active, children, onClick}) => {
 
     return (
 
-        <Link to={filter === 'ALL' ? '' : filter.toLowerCase()} onClick={onClick}>
+        <Link to={filter === 'all' ? '' : filter} onClick={onClick}>
             {children}
         </Link>
     )
