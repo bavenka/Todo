@@ -1,5 +1,7 @@
 import React, {PropTypes} from 'react';
 import TodoTextInput from '../components/todoTextInput'
+import CompleteAll from '../containers/completeAll'
+
 class Header extends React.Component {
 
     render() {
@@ -7,6 +9,7 @@ class Header extends React.Component {
         return (
             <header>
                 <h1>Todos</h1>
+                <CompleteAll/>
                 <TodoTextInput onSave={(text) => this.props.onAddClick(text)}
                                placeholder="What needs to be done?" />
             </header>
