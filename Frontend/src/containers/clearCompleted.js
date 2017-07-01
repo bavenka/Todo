@@ -16,7 +16,6 @@ const mapDispatchToProps = {
 const ClearCompleted = connect(
     mapStateToProps,
     mapDispatchToProps
-)
-(ClearCompletedComponent);
+)(ClearCompletedComponent);
 
 export default ClearCompleted
