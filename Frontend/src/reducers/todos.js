@@ -3,7 +3,8 @@ import {
     DELETE_TODO,
     COMPLETE_TODO,
     COMPLETE_ALL,
-    CLEAR_COMPLETED
+    CLEAR_COMPLETED,
+    EDIT_TODO
 } from '../constants/ActionTypes'
 
 const todos = (state = [], action) => {
