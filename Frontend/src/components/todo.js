@@ -37,7 +37,7 @@ class Todo extends React.Component {
             element = (
                 <div>
                     <Complete onCompleteClick={this.props.onCompleteClick} completed={this.props.completed}/>
-                    <label onDoubleClick={this.onDoubleClick}>
+                    <label onDoubleClick={this.onDoubleClick} style={{textDecoration: this.props.completed ? 'line-through' : 'none'}}>
                         {this.props.text}
                     </label>
                     <button onClick={this.props.onDeleteClick}>x</button>
@@ -47,7 +47,7 @@ class Todo extends React.Component {
 
 
         return (
-            <li style={{textDecoration: this.props.completed ? 'line-through' : 'none'}}>
+            <li>
                 {element}
             </li>
         )
