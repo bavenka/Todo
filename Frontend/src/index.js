@@ -8,7 +8,11 @@ import App from './components/app';
 import SignupPage from './components/signup'
 import Content from './components/content'
 
-let store = createStore(todoApp);
+//НЕ УДАЛЯЙ БЛЯТЬ ЭТО!!!
+//ЭТО ДЛЯ ДЭБАГА!!!
+const reduxDevtoolsExtension = window.__REDUX_DEVTOOLS_EXTENSION__;
+
+let store = createStore(todoApp, reduxDevtoolsExtension && reduxDevtoolsExtension());
 
 render(
     <Provider store={store}>
