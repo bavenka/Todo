@@ -1,9 +1,14 @@
 import React from 'react';
+import SignupForm from './signupForm.js'
 
 const SignupPage = () => {
 
     return (
-        <h1>SignupPage</h1>
+        <div className="row">
+            <div className="col-md-4 col-md-offset-4">
+                <SignupForm/>
+            </div>
+        </div>
     )
 };
 
