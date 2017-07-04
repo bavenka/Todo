@@ -3,12 +3,12 @@ var Schema = mongoose.Schema;
 
 
 var TODOSchema = new Schema({
-    description: {
+    text: {
         type: String,
         unique: false,
         required: true
     },
-    status:{
+    completed: {
         type: Boolean,
         required: true
     },
