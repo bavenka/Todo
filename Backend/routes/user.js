@@ -37,6 +37,9 @@ router.put('/', function (req, res, next) {
     User.findById(req.body.id, function (err, user) {
         if (err)
             return next(err);
+        if (user === null) {
+            return res.send(404, 'User not found!');
+        }
         user.first_name = req.body.first_name;
         user.last_name = req.body.last_name;
         user.email = req.body.email;
@@ -53,7 +56,7 @@ router.delete('/:id', function (req, res, next) {
     User.findById(req.params.id).remove(function (err) {
         if (err)
             return next(err);
-        res.send('Deleted.');
+        res.send(410);
     });
 });
 
@@ -61,7 +64,7 @@ router.delete('/email/:email', function (req, res, next) {
     User.find({email: req.params.email}).remove(function (err) {
         if (err)
             return next(err);
-        res.send('Deleted.');
+        res.send(410);
     });
 });
 
