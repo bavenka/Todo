@@ -37,7 +37,8 @@ class Todo extends React.Component {
             element = (
                 <div>
                     <Complete onCompleteClick={this.props.onCompleteClick} completed={this.props.completed}/>
-                    <label onDoubleClick={this.onDoubleClick} style={{textDecoration: this.props.completed ? 'line-through' : 'none'}}>
+                    <label onDoubleClick={this.onDoubleClick}
+                           style={{textDecoration: this.props.completed ? 'line-through' : 'none'}}>
                         {this.props.text}
                     </label>
                     <button onClick={this.props.onDeleteClick}>x</button>
@@ -55,8 +56,8 @@ class Todo extends React.Component {
 }
 
 Todo.propTypes = {
-    id:PropTypes.number.isRequired,
-    text:PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
+    text: PropTypes.string.isRequired,
     completed: PropTypes.bool.isRequired,
     onEditClick: PropTypes.func.isRequired,
     onDeleteClick: PropTypes.func.isRequired,

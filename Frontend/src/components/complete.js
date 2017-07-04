@@ -4,7 +4,7 @@ class Complete extends React.Component {
 
     render() {
         return (
-            <input type="checkbox" checked={this.props.completed} onClick={this.props.onCompleteClick}/>
+            <input type="checkbox" checked={this.props.completed} onChange={this.props.onCompleteClick}/>
         )
     }
 }

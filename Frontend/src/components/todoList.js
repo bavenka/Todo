@@ -9,12 +9,11 @@ class TodoList extends React.Component {
                 {this.props.todos.map((todo) =>
                     <Todo key={todo.id}
                           {...todo}
-                          onDeleteClick={() => this.props.onDeleteClick(todo.id)
-                          }
-                          onCompleteClick={() => this.props.onCompleteClick(todo.id)
-                          }
-                          onEditClick={(id, text) => this.props.onEditClick(todo.id, text)
-                          }
+                          onDeleteClick={() => this.props.onDeleteClick(todo.id)}
+
+                          onCompleteClick={() => this.props.onCompleteClick(todo.id)}
+
+                          onEditClick={(id, text) => this.props.onEditClick(todo.id, text)}
                     />
                 )}
             </ul>)
@@ -22,7 +21,7 @@ class TodoList extends React.Component {
 }
 
 TodoList.propTypes = {
-    todos:PropTypes.array.isRequired,
+    todos: PropTypes.array.isRequired,
     onEditClick: PropTypes.func.isRequired,
     onDeleteClick: PropTypes.func.isRequired,
     onCompleteClick: PropTypes.func.isRequired
