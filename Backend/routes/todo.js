@@ -4,6 +4,8 @@ var TODO = require('../models/todo');
 
 router.get('/', function (req, res, next) {
     TODO.find(function (err, todos) {
+        res.header("Access-Control-Allow-Origin", "*");
+        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
         res.json(todos);
     });
 });
@@ -19,8 +21,8 @@ router.get('/:userId', function (req, res, next) {
 router.post('/', function (req, res, next) {
     var newTODO = new TODO(
         {
-            description: req.body.description,
-            status: req.body.status,
+            text: req.body.text,
+            completed: req.body.completed,
             user: req.body.user_id
         });
     newTODO.save(function (err, newTODO) {
@@ -34,7 +36,7 @@ router.put('/', function (req, res, next) {
     TODO.findById(req.body.id, function (err, todo) {
         if (err)
             return next(err);
-        todo.description = req.body.description;
+        todo.text = req.body.text;
         todo.user = req.body.user_id;
         todo.save(function (err, todo) {
             if (err)
@@ -48,7 +50,7 @@ router.delete('/:id', function (req, res, next) {
     TODO.findById(req.params.id).remove(function (err) {
         if (err)
             return next(err);
-        res.send('Deleted.');
+        res.send(410);
     });
 });
 
