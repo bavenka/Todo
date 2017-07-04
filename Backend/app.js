@@ -3,6 +3,7 @@ var path = require('path');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var cors = require('cors');
 
 var DB = require('./DB_connection');
 
@@ -17,10 +18,13 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(cors());
+
+
 //TODO Express-validation посмореть библиотеку
 //TODO stream API
 
-//TODO посмотреть библиотеку cors
+//TODO Установить status для responce
 
 app.use('/api/user', user);
 app.use('/api/todo', todo);
