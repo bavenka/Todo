@@ -1,6 +1,7 @@
 import React, {PropTypes} from 'react';
 import classnames from 'classnames'
 import validateInput from '../validators/validate/validateInput'
+import {withRouter} from 'react-router-dom'
 
 class SignupForm extends React.Component {
 
@@ -20,7 +21,7 @@ class SignupForm extends React.Component {
 
     isValid() {
         const {errors, isValid} = validateInput(this.state);
-        if(!isValid) {
+        if (!isValid) {
             this.setState({errors})
         }
         return isValid;
@@ -34,7 +35,8 @@ class SignupForm extends React.Component {
         event.preventDefault();
         if (this.isValid()) {
             this.setState({errors: {}, isLoading: true});
-           // this.props.userSignup(this.state);
+            // this.props.userSignup(this.state);
+            this.props.history.push("/");
         }
     }
 
@@ -78,7 +80,7 @@ class SignupForm extends React.Component {
                     {errors.passwordConfirmation && <span className="help-block">{errors.passwordConfirmation}</span>}
                 </div>
                 <div className="form-group">
-                    <button className="btn btn-primary btn-lg">Submit</button>
+                    <button className="btn btn-primary btn-lg" disabled={this.state.isLoading}>Submit</button>
                 </div>
             </form>
         )
@@ -86,7 +88,10 @@ class SignupForm extends React.Component {
 }
 
 SignupForm.propTypes = {
-    userSignup: PropTypes.func.isRequired
+    userSignup: PropTypes.func.isRequired,
+    history: React.PropTypes.shape({
+        push: React.PropTypes.func.isRequired,
+    }).isRequired,
 };
 
-export default SignupForm;
+export default withRouter(SignupForm);
