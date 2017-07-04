@@ -4,16 +4,14 @@ var TODO = require('../models/todo');
 
 router.get('/', function (req, res, next) {
     TODO.find(function (err, todos) {
-        res.header("Access-Control-Allow-Origin", "*");
-        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-        res.json(todos);
+        res.status(200).json(todos);
     });
 });
 
 router.get('/:userId', function (req, res, next) {
     TODO.find({user: req.params.userId}, function (err, todos) {
         TODO.populate(todos, {path: 'User'}, function (err, todos) {
-            res.send(todos);
+            res.status(200).json(todos);
         });
     });
 });
@@ -28,7 +26,7 @@ router.post('/', function (req, res, next) {
     newTODO.save(function (err, newTODO) {
         if (err)
             return next(err);
-        res.send(newTODO);
+        res.status(201).json(newTODO);
     });
 });
 
@@ -41,7 +39,7 @@ router.put('/', function (req, res, next) {
         todo.save(function (err, todo) {
             if (err)
                 return next(err);
-            res.send(todo);
+            res.status(202).json(todo);
         });
     });
 });
@@ -50,7 +48,7 @@ router.delete('/:id', function (req, res, next) {
     TODO.findById(req.params.id).remove(function (err) {
         if (err)
             return next(err);
-        res.send(410);
+        res.send(200);
     });
 });
 

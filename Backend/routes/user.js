@@ -6,7 +6,7 @@ router.get('/', function (req, res, next) {
     User.find(function (err, users) {
         if (err)
             return next(err);
-        res.send(users);
+        res.status(200).send(users);
     });
 });
 
@@ -14,7 +14,7 @@ router.get('/email/:email', function (req, res, next) {
     User.find({email: req.params.email}, function (err, user) {
         if (err)
             return next(err);
-        res.send(user);
+        res.status(200).send(user);
     });
 });
 
@@ -29,7 +29,7 @@ router.post('/', function (req, res, next) {
     newUser.save(function (err, newUser) {
         if (err)
             return next(err);
-        res.send(newUser);
+        res.status(201).send(newUser);
     });
 });
 
@@ -47,7 +47,7 @@ router.put('/', function (req, res, next) {
         user.save(function (err, user) {
             if (err)
                 return next(err);
-            res.send(user);
+            res.status(202).send(user);
         });
     });
 });
@@ -56,7 +56,7 @@ router.delete('/:id', function (req, res, next) {
     User.findById(req.params.id).remove(function (err) {
         if (err)
             return next(err);
-        res.send(410);
+        res.send(200);
     });
 });
 
@@ -64,7 +64,7 @@ router.delete('/email/:email', function (req, res, next) {
     User.find({email: req.params.email}).remove(function (err) {
         if (err)
             return next(err);
-        res.send(410);
+        res.send(200);
     });
 });
 
