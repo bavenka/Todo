@@ -20,6 +20,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 //TODO Express-validation посмореть библиотеку
 //TODO stream API
 
+//TODO посмотреть библиотеку cors
+
 app.use('/api/user', user);
 app.use('/api/todo', todo);
 
