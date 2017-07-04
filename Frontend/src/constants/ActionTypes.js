@@ -10,5 +10,6 @@ export const REQUEST_TODOS = 'REQUEST_TODOS';
 export const RECEIVE_TODOS = 'RECEIVE_TODOS';
 //Sign UP
 export const ADD_FLASH_MESSAGE = 'ADD_FLASH_MESSAGE';
+export const DELETE_FLASH_MESSAGE = 'DELETE_FLASH_MESSAGE';
 export const SUCCESS_SIGNUP_MESSAGE = 'You signed up successfully. Welcome!';
 export const SUCCESS_TYPE_MESSAGE = 'success';

@@ -1,4 +1,4 @@
-import {ADD_FLASH_MESSAGE} from '../constants/ActionTypes'
+import {ADD_FLASH_MESSAGE, DELETE_FLASH_MESSAGE} from '../constants/ActionTypes'
 
 const flashMessages = (state = [], action) => {
     switch (action.type) {
@@ -11,6 +11,8 @@ const flashMessages = (state = [], action) => {
                     text: action.text
                 }
             ];
+        case DELETE_FLASH_MESSAGE:
+            return state.filter(flashMessage => flashMessage.id !== action.id);
         default:
             return state
     }

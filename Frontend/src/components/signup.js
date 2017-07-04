@@ -20,7 +20,7 @@ const SignupPage = ({userSignup, addFlashMessage}) => {
 
 SignupPage.propTypes = {
     userSignup: PropTypes.func.isRequired,
-    addFlashMessage: PropTypes.func.isLoading
+    addFlashMessage: PropTypes.func.isRequired
 };
 
 export default connect(null, {userSignup, addFlashMessage})(SignupPage);
