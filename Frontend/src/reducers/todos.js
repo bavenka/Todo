@@ -4,11 +4,20 @@ import {
     COMPLETE_TODO,
     COMPLETE_ALL,
     CLEAR_COMPLETED,
-    EDIT_TODO
+    EDIT_TODO,
+    REQUEST_TODOS,
+    RECEIVE_TODOS
 } from '../constants/ActionTypes'
 
 const todos = (state = [], action) => {
     switch (action.type) {
+
+        case RECEIVE_TODOS:
+            return action.todos.map(todo => {
+                todo.id = todo._id;
+                delete todo._id;
+                return todo;
+            });
         case ADD_TODO:
             return [
                 ...state,
