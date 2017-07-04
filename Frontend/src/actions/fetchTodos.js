@@ -2,21 +2,17 @@
 import receiveTodos from './receiveTodos'
 
 
-export const fetchTodos = (dispatch) => {
+export const fetchTodosByUserId = (userId) => (dispatch) => {
 
-    return fetch(`http://127.0.0.1:3000/api/todo`,
+    return fetch(`http://127.0.0.1:3000/api/todo/` + userId,
         {
             method: 'GET',
-            headers: {
-                "Content-type": "application/x-www-form-urlencoded; charset=UTF-8"
-            },
         })
         .then(response => response.json())
         .then(todos => {
             dispatch(receiveTodos(todos))
         })
         .catch((err) => {
-            debugger;
             throw err;
         });
 };
