@@ -22,7 +22,7 @@ class TodoList extends React.Component {
 }
 
 TodoList.propTypes = {
-    todos:PropTypes.array.isRequired,
+    todos: PropTypes.array.isRequired,
     onEditClick: PropTypes.func.isRequired,
     onDeleteClick: PropTypes.func.isRequired,
     onCompleteClick: PropTypes.func.isRequired

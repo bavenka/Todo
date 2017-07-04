@@ -2,6 +2,7 @@ import React, {PropTypes} from 'react';
 import classnames from 'classnames'
 import validateInput from '../validators/validate/validateInput'
 import {withRouter} from 'react-router-dom'
+import {SUCCESS_SIGNUP_MESSAGE, SUCCESS_TYPE_MESSAGE} from '../constants/ActionTypes'
 
 class SignupForm extends React.Component {
 
@@ -36,6 +37,7 @@ class SignupForm extends React.Component {
         if (this.isValid()) {
             this.setState({errors: {}, isLoading: true});
             // this.props.userSignup(this.state);
+            this.props.addFlashMessage(SUCCESS_TYPE_MESSAGE, SUCCESS_SIGNUP_MESSAGE);
             this.props.history.push("/");
         }
     }
@@ -92,6 +94,7 @@ SignupForm.propTypes = {
     history: React.PropTypes.shape({
         push: React.PropTypes.func.isRequired,
     }).isRequired,
+    addFlashMessage: PropTypes.func.isRequired
 };
 
 export default withRouter(SignupForm);
