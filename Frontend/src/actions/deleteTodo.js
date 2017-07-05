@@ -14,8 +14,9 @@ export const deleteTodo = (id) => (dispatch) => {
         {
             method: 'delete',
         })
-        .then(res => {
-            dispatch(deleteTodoAction(id))
+        .then(response => {
+            if (response.status === 200)
+                dispatch(deleteTodoAction(id))
         })
         .catch((err) => {
             throw err;
