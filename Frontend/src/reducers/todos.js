@@ -11,7 +11,6 @@ import {
 
 const todos = (state = [], action) => {
     switch (action.type) {
-
         case RECEIVE_TODOS:
             return action.todos.map(todo => {
                 todo.id = todo._id;

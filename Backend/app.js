@@ -24,7 +24,6 @@ app.use(cors());
 //TODO Express-validation посмореть библиотеку
 //TODO stream API
 
-//TODO Установить status для responce
 
 app.use('/api/user', user);
 app.use('/api/todo', todo);
