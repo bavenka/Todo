@@ -7,7 +7,6 @@ const deleteTodoAction = (id) => {
     }
 };
 
-
 export const deleteTodo = (id) => (dispatch) => {
 
     return fetch(`http://127.0.0.1:3000/api/todo/` + id,
