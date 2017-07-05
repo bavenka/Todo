@@ -34,8 +34,17 @@ router.put('/', function (req, res, next) {
     TODO.findById(req.body.id, function (err, todo) {
         if (err)
             return next(err);
-        todo.text = req.body.text;
-        todo.user = req.body.user_id;
+
+        if (req.body.text !== undefined && req.body.text !== null) {
+            todo.text = req.body.text;
+        }
+        if (req.body.user_id !== undefined && req.body.user_id !== null) {
+            todo.user = req.body.user_id;
+        }
+        if (req.body.completed !== undefined && req.body.completed !== null) {
+            todo.completed = req.body.completed;
+        }
+
         todo.save(function (err, todo) {
             if (err)
                 return next(err);
