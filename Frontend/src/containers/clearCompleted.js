@@ -1,6 +1,6 @@
 import {connect} from 'react-redux';
 import ClearCompletedComponent from '../components/clearCompleted';
-import ClearCompletedAction from '../actions/clearCompleted'
+import clearCompleted from '../actions/clearCompleted'
 
 const mapStateToProps = (state) => {
     return {
@@ -9,8 +9,12 @@ const mapStateToProps = (state) => {
     }
 };
 
-const mapDispatchToProps = {
-    OnClearCompletedClick: ClearCompletedAction
+const mapDispatchToProps = (dispatch) => {
+    return {
+        OnClearCompletedClick: () => {
+            dispatch(clearCompleted())
+        }
+    }
 };
 
 const ClearCompleted = connect(
