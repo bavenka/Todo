@@ -2,7 +2,7 @@ import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom'
 import TodoList from '../components/todoList';
 import deleteTodo from '../actions/deleteTodo';
-import completeTodo from '../actions/completeTodo';
+import completeTodo from '../actions/changeTodoCompleted';
 import editTodo from '../actions/editTodo';
 
 const getTodos = (todos, filter) => {
