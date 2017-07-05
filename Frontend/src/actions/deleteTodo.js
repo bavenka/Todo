@@ -15,7 +15,6 @@ export const deleteTodo = (id) => (dispatch) => {
             method: 'delete',
         })
         .then(res => {
-            debugger;
             dispatch(deleteTodoAction(id))
         })
         .catch((err) => {
