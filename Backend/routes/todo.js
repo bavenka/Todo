@@ -45,7 +45,6 @@ router.put('/', function (req, res, next) {
                 todo.completed = req.body.completed;
             }
 
-
             todo.save(function (err, todo) {
                 if (err)
                     return next(err);
@@ -87,11 +86,19 @@ router.put('/completeAll/:user_id', function (req, res, next) {
     });
 });
 
+router.delete('/clearCompleted/:user_id', function (req, res, next) {
+    TODO.remove({user: req.params.user_id, completed: true}, function (err) {
+        if (err)
+            return next(err);
+        res.sendStatus(200);
+    });
+});
+
 router.delete('/:id', function (req, res, next) {
     TODO.findById(req.params.id).remove(function (err) {
         if (err)
             return next(err);
-        res.send(200);
+        res.sendStatus(200);
     });
 });
 
