@@ -34,22 +34,24 @@ router.put('/', function (req, res, next) {
     TODO.findById(req.body.id, function (err, todo) {
         if (err)
             return next(err);
+        if (todo !== null) {
+            if (req.body.text !== undefined && req.body.text !== null) {
+                todo.text = req.body.text;
+            }
+            if (req.body.user_id !== undefined && req.body.user_id !== null) {
+                todo.user = req.body.user_id;
+            }
+            if (req.body.completed !== undefined && req.body.completed !== null) {
+                todo.completed = req.body.completed;
+            }
 
-        if (req.body.text !== undefined && req.body.text !== null) {
-            todo.text = req.body.text;
-        }
-        if (req.body.user_id !== undefined && req.body.user_id !== null) {
-            todo.user = req.body.user_id;
-        }
-        if (req.body.completed !== undefined && req.body.completed !== null) {
-            todo.completed = req.body.completed;
-        }
 
-        todo.save(function (err, todo) {
-            if (err)
-                return next(err);
-            res.status(202).json(todo);
-        });
+            todo.save(function (err, todo) {
+                if (err)
+                    return next(err);
+                res.status(202).json(todo);
+            });
+        }
     });
 });
 
@@ -65,6 +67,23 @@ router.put('/changeCompleted/:id', function (req, res, next) {
                 return next(err);
             res.status(202).json(todo);
         });
+    });
+});
+
+router.put('/completeAll/:user_id', function (req, res, next) {
+    TODO.find({user: req.params.user_id}, function (err, todos) {
+        if (err)
+            return next(err);
+        if (todos !== null) {
+            const areAllMarked = todos.every(todo => todo.completed);
+            todos.forEach(todo => todo.completed = !areAllMarked);
+
+            todos.forEach(todo => todo.save(function (err, todo) {
+                if (err)
+                    return next(err);
+            }));
+            res.status(202).json(todos);
+        }
     });
 });
 
