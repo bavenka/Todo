@@ -1,4 +1,5 @@
 import {COMPLETE_ALL} from '../constants/ActionTypes'
+import {fake_user_id} from "../constants/fakeUser";
 
 const completeAllAction = () => {
     return {
@@ -8,7 +9,7 @@ const completeAllAction = () => {
 
 //TODO передовать user_id текущего пользователя
 export const completeAll = (user_id) => (dispatch) => {
-    user_id = '595ab20b6dd8163038f2665f';
+    user_id = fake_user_id;
     return fetch(`http://127.0.0.1:3000/api/todo/completeAll/` + user_id,
         {
             method: 'put',
