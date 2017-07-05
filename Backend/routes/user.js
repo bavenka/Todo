@@ -21,8 +21,7 @@ router.get('/email/:email', function (req, res, next) {
 router.post('/', function (req, res, next) {
     var newUser = new User(
         {
-            first_name: req.body.first_name,
-            last_name: req.body.last_name,
+            username: req.body.username,
             email: req.body.email,
             password: req.body.password
         });
@@ -37,11 +36,10 @@ router.put('/', function (req, res, next) {
     User.findById(req.body.id, function (err, user) {
         if (err)
             return next(err);
-        if (user === null) {
+        if (user === null)
             return res.send(404, 'User not found!');
-        }
-        user.first_name = req.body.first_name;
-        user.last_name = req.body.last_name;
+
+        user.username = req.body.username;
         user.email = req.body.email;
         user.password = req.body.password;
         user.save(function (err, user) {
