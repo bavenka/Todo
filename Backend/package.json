@@ -11,6 +11,8 @@
     "cors": "^2.8.3",
     "debug": "~2.6.3",
     "express": "~4.15.2",
+    "express-validation": "^1.0.2",
+    "joi": "^10.6.0",
     "mongoose": "^4.10.6",
     "morgan": "~1.8.1",
     "serve-favicon": "~2.4.2"
