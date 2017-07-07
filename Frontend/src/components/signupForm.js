@@ -2,7 +2,13 @@ import React, {PropTypes} from 'react';
 import classnames from 'classnames'
 import validateInput from '../validators/validate/validateInput'
 import {withRouter} from 'react-router-dom'
-import {SUCCESS_SIGNUP_MESSAGE, SUCCESS_TYPE_MESSAGE} from '../constants/ActionTypes'
+import * as userApi from '../api/userApi'
+import {
+    SUCCESS_SIGNUP_MESSAGE,
+    SUCCESS_TYPE_MESSAGE,
+    ERROR_SIGNUP_MESSAGE,
+    ERROR_TYPE_MESSAGE
+} from '../constants/ActionTypes'
 
 class SignupForm extends React.Component {
 
@@ -14,7 +20,7 @@ class SignupForm extends React.Component {
             password: '',
             passwordConfirmation: '',
             isLoading: false,
-            errors: {},
+            errors: {}
         };
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
@@ -32,13 +38,26 @@ class SignupForm extends React.Component {
         this.setState({[event.target.name]: event.target.value})
     }
 
-    onSubmit(event) {
+    async onSubmit(event) {
         event.preventDefault();
         if (this.isValid()) {
-            this.setState({errors: {}, isLoading: true});
-            // this.props.userSignup(this.state);
-            this.props.addFlashMessage(SUCCESS_TYPE_MESSAGE, SUCCESS_SIGNUP_MESSAGE);
-            this.props.history.push("/");
+            try {
+                const {username, email, password} = this.state;
+                const user = Object.assign({}, username, email, password);
+                const response = await userApi.saveUser(user);
+                if (response.status === 200) {
+                    this.setState({errors: {}, isLoading: true});
+                    this.props.addFlashMessage(SUCCESS_TYPE_MESSAGE, SUCCESS_SIGNUP_MESSAGE);
+                    this.props.history.push("/");
+                }
+                else {
+                    this.props.addFlashMessage(ERROR_TYPE_MESSAGE, ERROR_SIGNUP_MESSAGE);
+                }
+            }
+            catch (e) {
+                this.props.addFlashMessage(ERROR_TYPE_MESSAGE, e.message);
+
+            }
         }
     }
 
