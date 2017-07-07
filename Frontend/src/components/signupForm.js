@@ -1,6 +1,7 @@
 import React, {PropTypes} from 'react';
 import classnames from 'classnames'
 import validateInput from '../validators/validate/validateInput'
+import checkUserExists from '../validators/validate/isUserExists'
 import {withRouter} from 'react-router-dom'
 import * as userApi from '../api/userApi'
 import {
@@ -25,6 +26,18 @@ class SignupForm extends React.Component {
         };
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
+        this.onBlur = this.onBlur.bind(this);
+    }
+
+    onBlur(event) {
+        const field = event.target.name;
+        const value = event.target.value;
+        if (value !== '') {
+            const {errors, isUserExists} = checkUserExists(field, value);
+            if (isUserExists) {
+                this.setState({errors})
+            }
+        }
     }
 
     isValid() {
@@ -44,23 +57,18 @@ class SignupForm extends React.Component {
         })
     }
 
+
     async onSubmit(event) {
         event.preventDefault();
         if (this.isValid()) {
             try {
-                const response = await userApi.saveUser(this.state.user);
-                if (response.status === 201) {
-                    this.setState({errors: {}, isLoading: true});
-                    this.props.addFlashMessage(SUCCESS_TYPE_MESSAGE, SUCCESS_SIGNUP_MESSAGE);
-                    this.props.history.push("/");
-                }
-                else {
-                    this.props.addFlashMessage(ERROR_TYPE_MESSAGE, ERROR_SIGNUP_MESSAGE);
-                }
+                await userApi.saveUser(this.state.user);
+                this.setState({errors: {}, isLoading: true});
+                this.props.addFlashMessage(SUCCESS_TYPE_MESSAGE, SUCCESS_SIGNUP_MESSAGE);
+                this.props.history.push("/");
             }
             catch (e) {
-                this.props.addFlashMessage(ERROR_TYPE_MESSAGE, e.message);
-
+                this.props.addFlashMessage(ERROR_TYPE_MESSAGE, ERROR_SIGNUP_MESSAGE);
             }
         }
     }
@@ -77,6 +85,7 @@ class SignupForm extends React.Component {
                     <input type="text" name="username"
                            value={this.state.user.username}
                            onChange={this.onChange}
+                           onBlur={this.onBlur}
                            className="form-control"/>
                     {errors.username && <span className="help-block">{errors.username}</span>}
                 </div>
@@ -84,6 +93,7 @@ class SignupForm extends React.Component {
                     <label className="control-label">Email</label>
                     <input type="email" name="email"
                            value={this.state.user.email}
+                           onBlur={this.onBlur}
                            onChange={this.onChange}
                            className="form-control"/>
                     {errors.email && <span className="help-block">{errors.email}</span>}
@@ -104,12 +114,15 @@ class SignupForm extends React.Component {
     }
 }
 
-SignupForm.propTypes = {
-    userSignup: PropTypes.func.isRequired,
+SignupForm
+    .propTypes = {
     history: React.PropTypes.shape({
         push: React.PropTypes.func.isRequired,
     }).isRequired,
     addFlashMessage: PropTypes.func.isRequired
 };
 
-export default withRouter(SignupForm);
+export
+default
+
+withRouter(SignupForm);
