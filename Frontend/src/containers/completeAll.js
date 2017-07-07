@@ -1,6 +1,6 @@
 import {connect} from 'react-redux';
 import CompleteAllComponents from '../components/completeAll';
-import completeAllAction from '../actions/completeAll';
+import completeAll from '../API/Todos/completeAll';
 
 const mapStateToProps = (state) => {
     return {
@@ -9,7 +9,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
-    onCompleteAllClick: completeAllAction
+    onCompleteAllClick: completeAll
 };
 
 const CompleteAll = connect(

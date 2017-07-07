@@ -1,10 +1,10 @@
 import {RECEIVE_TODOS} from '../constants/ActionTypes'
 
-const receiveTodos = (todos) => {
+const receiveTodosAction = (todos) => {
     return {
         type: RECEIVE_TODOS,
         todos
     }
 };
 
-export default receiveTodos
+export default receiveTodosAction

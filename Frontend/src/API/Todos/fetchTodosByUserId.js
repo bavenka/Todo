@@ -1,5 +1,4 @@
-import receiveTodos from './receiveTodos'
-
+import receiveTodos from '../../actions/receiveTodosAction'
 
 export const fetchTodosByUserId = (userId) => (dispatch) => {
 

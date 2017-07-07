@@ -1,34 +1,24 @@
-import {EDIT_TODO} from '../constants/ActionTypes'
+import addTodo from '../../actions/addTodoAction'
 
-const editTodoAction = (id, text) => {
-    return {
-        type: EDIT_TODO,
-        id,
-        text
-    }
-};
-
-export const editTodo = (id, text) => (dispatch) => {
+export const postTodo = (userId, text, completed) => (dispatch) => {
 
     return fetch(`http://127.0.0.1:3000/api/todo/`,
         {
-            method: 'put',
+            method: 'post',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
                 'text': text,
-                'id': id,
+                'completed': completed,
+                'user_id': userId,
             })
         })
         .then(response => response.json())
         .then(todo => {
-            dispatch(editTodoAction(todo._id, todo.text))
+            dispatch(addTodo(todo._id, todo.text))
         })
         .catch((err) => {
             throw err;
         });
 };
-
-
-export default editTodo

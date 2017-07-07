@@ -1,6 +1,6 @@
 import {ADD_TODO} from '../constants/ActionTypes'
 
-const addTodo = (id, text) => {
+const addTodoAction = (id, text) => {
     return {
         type: ADD_TODO,
         id,
@@ -8,4 +8,4 @@ const addTodo = (id, text) => {
     }
 };
 
-export default addTodo
+export default addTodoAction
