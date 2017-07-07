@@ -10,8 +10,7 @@ export const saveUser = async (user) => {
         body: JSON.stringify({
             email: user.email,
             password: user.password,
-            first_name: user.username,
-            last_name: "lol",
+            username: user.username,
         })
     });
 };
