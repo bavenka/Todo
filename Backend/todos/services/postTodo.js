@@ -6,9 +6,5 @@ module.exports = function (text, completed, userId) {
         completed,
         user: userId
     });
-    return newTODO.save(function (err, newTODO) {
-        if (err)
-            return err;
-        return newTODO;
-    })
+    return newTODO.save();
 };

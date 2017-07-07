@@ -1,6 +1,9 @@
 import deleteTodoById from '../services/deleteTodoById';
 
-module.exports = async function (req, res, next) {
-    const err = await deleteTodoById(req.params.id);
-    err ? res.send(err) : res.sendStatus(200);
+module.exports = function (req, res, next) {
+    deleteTodoById(req.params.id).then(err => {
+        err === null ? res.status(500).send(err) : res.sendStatus(200);
+    }).catch(err => {
+        res.status(500).send(err);
+    });
 };
