@@ -1,15 +1,6 @@
-const TODO = require('../models/todo');
+import postTodo from '../services/postTodo'
 
-module.exports = function (req, res, next) {
-    let newTODO = new TODO(
-        {
-            text: req.body.text,
-            completed: req.body.completed,
-            user: req.body.user_id
-        });
-    newTODO.save(function (err, newTODO) {
-        if (err)
-            return next(err);
-        res.status(201).json(newTODO);
-    })
+module.exports = async function (req, res, next) {
+    const newTODO = await postTodo(req.body.text, req.body.completed, req.body.user_id);
+    res.status(201).json(newTODO);
 };

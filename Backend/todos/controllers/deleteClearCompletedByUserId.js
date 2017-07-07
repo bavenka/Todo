@@ -1,9 +1,6 @@
-const TODO = require('../models/todo');
+import deleteClearCompletedByUserId from '../services/deleteClearCompletedByUserId'
 
-module.exports = function (req, res, next) {
-    TODO.remove({user: req.params.user_id, completed: true}, function (err) {
-        if (err)
-            return next(err);
-        res.sendStatus(200);
-    })
+module.exports = async function (req, res, next) {
+    const err = await deleteClearCompletedByUserId(req.params.user_id);
+    err ? res.send(err) : res.sendStatus(200);
 };

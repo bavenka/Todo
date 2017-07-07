@@ -1,9 +1,6 @@
-const TODO = require('../models/todo');
+import deleteTodoById from '../services/deleteTodoById';
 
-module.exports = function (req, res, next) {
-    TODO.findById(req.params.id).remove(function (err) {
-        if (err)
-            return next(err);
-        res.sendStatus(200);
-    })
+module.exports = async function (req, res, next) {
+    const err = await deleteTodoById(req.params.id);
+    err ? res.send(err) : res.sendStatus(200);
 };

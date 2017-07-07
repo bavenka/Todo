@@ -1,25 +1,7 @@
-const TODO = require('../models/todo');
+const putTodo = require('../services/putTodo');
 
-module.exports = function (req, res, next) {
-    TODO.findById(req.body.id, function (err, todo) {
-        if (err)
-            return next(err);
-        if (todo !== null) {
-            if (req.body.text) {
-                todo.text = req.body.text;
-            }
-            if (req.body.user_id) {
-                todo.user = req.body.user_id;
-            }
-            if (req.body.completed) {
-                todo.completed = req.body.completed;
-            }
-
-            todo.save(function (err, todo) {
-                if (err)
-                    return next(err);
-                res.status(202).json(todo);
-            });
-        }
-    });
+module.exports = async function (req, res, next) {
+    const todo =
+        await putTodo(req.body.id, req.body.text, req.body.user_id, req.body.completed);
+    res.status(202).json(todo);
 };

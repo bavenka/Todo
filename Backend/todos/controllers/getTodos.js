@@ -1,7 +1,6 @@
-const TODO = require('../models/todo');
+const getTodos = require('../services/getTodos');
 
-module.exports = function (req, res, next) {
-    TODO.find(function (err, todos) {
-        res.status(200).json(todos);
-    })
+module.exports = async function (req, res, next) {
+    const todos = await getTodos(); //TODO как отловить ошибку?
+    res.status(200).json(todos);
 };

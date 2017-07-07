@@ -1,9 +1,6 @@
-const TODO = require('../models/todo');
+const getTodosByUserId = require('../services/getTodosByUserId');
 
-module.exports = function (req, res, next) {
-    TODO.find({user: req.params.userId}, function (err, todos) {
-        TODO.populate(todos, {path: 'User'}, function (err, todos) {
-            res.status(200).json(todos);
-        });
-    })
+module.exports = async function (req, res, next) {
+    const todos = await getTodosByUserId(req.params.userId);
+    res.status(200).json(todos);
 };
