@@ -1,4 +1,4 @@
-import React,{PropTypes} from 'react';
+import React, {PropTypes} from 'react';
 
 class TodoTextInput extends React.Component {
 
@@ -24,8 +24,8 @@ class TodoTextInput extends React.Component {
         this.setState({text: event.target.value})
     }
 
-    onBlur (event) {
-        if(this.props.editing) {
+    onBlur(event) {
+        if (this.props.editing) {
             this.props.onSave(event.target.value)
         }
     }
@@ -48,7 +48,7 @@ TodoTextInput.propTypes = {
     onSave: PropTypes.func.isRequired,
     text: PropTypes.string,
     editing: PropTypes.bool,
-    placeholder:PropTypes.string,
+    placeholder: PropTypes.string,
 };
 
 export default TodoTextInput

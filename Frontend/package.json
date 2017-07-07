@@ -10,7 +10,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.16.2",
+    "classnames": "^2.2.5",
     "css-loader": "^0.28.4",
+    "lodash": "^4.17.4",
     "prop-types": "^15.5.10",
     "react": "^15.6.0",
     "react-dom": "^15.6.0",
