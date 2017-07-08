@@ -1,7 +1,7 @@
 import {getUserByEmail} from '../../api/userApi'
 import lodash from 'lodash'
 
-function checkUsernameExists(field, data) {
+async function checkUsernameExists(field, data) {
 
     let errors = {};
     let user = {};
@@ -9,8 +9,8 @@ function checkUsernameExists(field, data) {
     switch (field) {
         case 'email':
             try {
-                user = getUserByEmail(data);
-                if (!lodash.isNull(user)) {
+                user = await getUserByEmail(data);
+                if (!lodash.isEmpty(user)) {
                     errors.email = 'There is user with such email.';
                 }
 

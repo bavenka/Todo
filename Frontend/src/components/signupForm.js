@@ -29,11 +29,12 @@ class SignupForm extends React.Component {
         this.onBlur = this.onBlur.bind(this);
     }
 
-    onBlur(event) {
+    async onBlur(event) {
+        this.setState({errors: {}});
         const field = event.target.name;
         const value = event.target.value;
         if (value !== '') {
-            const {errors, isUserExists} = checkUserExists(field, value);
+            const {errors, isUserExists} = await checkUserExists(field, value);
             if (isUserExists) {
                 this.setState({errors})
             }
@@ -49,6 +50,7 @@ class SignupForm extends React.Component {
     }
 
     onChange(event) {
+        this.setState({errors: {}});
         const field = event.target.name;
         const user = this.state.user;
         user[field] = event.target.value;
