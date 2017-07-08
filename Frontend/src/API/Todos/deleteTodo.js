@@ -1,13 +1,6 @@
-import {DELETE_TODO} from '../constants/ActionTypes'
+import deleteTodoAction from '../../actions/deleteTodoAction'
 
-const deleteTodoAction = (id) => {
-    return {
-        type: DELETE_TODO,
-        id
-    }
-};
-
-export const deleteTodo = (id) => (dispatch) => {
+const deleteTodo = (id) => (dispatch) => {
 
     return fetch(`http://127.0.0.1:3000/api/todo/` + id,
         {

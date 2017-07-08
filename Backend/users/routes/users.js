@@ -11,7 +11,15 @@ router.get('/', function (req, res, next) {
 });
 
 router.get('/email/:email', function (req, res, next) {
-    User.find({email: req.params.email}, function (err, user) {
+    User.findOne({email: req.params.email}, function (err, user) {
+        if (err)
+            return next(err);
+        res.status(200).send(user);
+    });
+});
+
+router.get('/username/:username', function (req, res, next) {
+    User.findOne({username: req.params.username}, function (err, user) {
         if (err)
             return next(err);
         res.status(200).send(user);

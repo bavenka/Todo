@@ -1,8 +1,7 @@
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-
-var TODOSchema = new Schema({
+const TODOSchema = new Schema({
     text: {
         type: String,
         unique: false,
@@ -18,5 +17,4 @@ var TODOSchema = new Schema({
     }
 });
 
-var TODO = mongoose.model('TODO', TODOSchema);
-module.exports = TODO;
+module.exports = TODOSchema;

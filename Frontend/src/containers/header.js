@@ -1,6 +1,6 @@
 import {connect} from 'react-redux';
 import Header from '../components/header';
-import {postTodo} from '../actions/postTodo';
+import {postTodo} from '../API/Todos/postTodo';
 import {fake_user_id} from "../constants/fakeUser";
 
 const mapDispatchToProps = (dispatch) => {
