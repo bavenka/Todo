@@ -4,8 +4,7 @@ let Connection = mongoose.connection;
 
 let timeout = 5000;
 
-const connect = () => mongoose.connect('mongodb://localhost/test', {server: {auto_reconnect: true}});
-connect();
+export const connect = (url) => mongoose.connect(url || 'mongodb://localhost/test', {server: {auto_reconnect: true}});
 
 Connection.on('error', function (err) {
     console.error('Connection error(DB):', err.message);
@@ -19,4 +18,4 @@ Connection.on('disconnected', function () {
     setTimeout(connect, timeout);
 });
 
-module.exports = Connection;
+export default Connection;
