@@ -5,7 +5,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var cors = require('cors');
 
-var DB = require('./DB_connection');
+var Connection = require('./DB_connection');
 
 var users = require('./users/routes/users');
 var todos = require('./todos/routes/todos');

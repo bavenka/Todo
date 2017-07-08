@@ -1,19 +1,22 @@
-var mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
-var DB = mongoose.connection;
+let Connection = mongoose.connection;
 
-mongoose.connect('mongodb://localhost/test', {server: {auto_reconnect: true}});
+let timeout = 5000;
 
-DB.on('error', function (err) {
+const connect = () => mongoose.connect('mongodb://localhost/test', {server: {auto_reconnect: true}});
+connect();
+
+Connection.on('error', function (err) {
     console.error('Connection error(DB):', err.message);
 });
-DB.on('open', function callback() {
+Connection.on('open', function callback() {
     console.info("Connected to DB opened!");
 });
 
-DB.on('disconnected', function () {
+Connection.on('disconnected', function () {
     console.log('DB disconnected!');
-    mongoose.connect('mongodb://localhost/test', {server: {auto_reconnect: true}});
+    setTimeout(connect, timeout);
 });
 
-module.exports = DB;
+module.exports = Connection;
