@@ -1,16 +1,16 @@
 import express from 'express'
-var path = require('path');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-var cors = require('cors');
+import path from 'path';
+import logger from 'morgan';
+import cookieParser from 'cookie-parser';
+import bodyParser from 'body-parser';
 
-var Connection = require('./DB_connection');
+import {connect} from './DB_connection';
+import {DB_URL} from './constants/index';
+import cors from 'cors';
+import users from './users/routes/users';
+import todos from './todos/routes/todos';
 
-var users = require('./users/routes/users');
-var todos = require('./todos/routes/todos');
-
-var app = express();
+let app = express();
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -18,12 +18,10 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+
 app.use(cors());
 
-
-//TODO Express-validation посмореть библиотеку
-//TODO stream API
-
+connect(DB_URL);
 
 app.use('/api/user', users);
 app.use('/api/todo', todos);
