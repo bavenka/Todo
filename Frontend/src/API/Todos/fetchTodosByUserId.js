@@ -6,7 +6,12 @@ export const fetchTodosByUserId = (userId) => (dispatch) => {
         {
             method: 'GET',
         })
-        .then(response => response.json())
+        .then(response => {
+            if (response.status === 200) //TODO !!! надо ли обновлять элементы если статус 304? //|| response.status == 304
+                return response.json();
+            else
+                throw response.error;
+        })
         .then(todos => {
             dispatch(receiveTodos(todos))
         })
