@@ -1,6 +1,6 @@
 import {SERVER_URL} from '../constants/ActionTypes'
 
-export async function saveUser (user) {
+export const saveUser = async (user) => {
     const response = await fetch(SERVER_URL + '/user', {
         method: 'POST',
         headers: {
@@ -17,7 +17,8 @@ export async function saveUser (user) {
         throw new Error('Looks like there was a problem. Status Code: ' +
             response.status);
     }
-}
+    return response;
+};
 
 export const getUserByEmail = async (email) => {
 

@@ -3,7 +3,8 @@ import classnames from 'classnames'
 import validateInput from '../validators/validate/validateInput'
 import checkUserExists from '../validators/validate/isUserExists'
 import {withRouter} from 'react-router-dom'
-import * as userApi from '../api/userApi'
+import {connect} from 'react-redux'
+
 import {
     SUCCESS_SIGNUP_MESSAGE,
     SUCCESS_TYPE_MESSAGE,
@@ -64,7 +65,7 @@ class SignupForm extends React.Component {
         event.preventDefault();
         if (this.isValid()) {
             try {
-                await userApi.saveUser(this.state.user);
+                await this.props.createUser(this.state.user);
                 this.setState({errors: {}, isLoading: true});
                 this.props.addFlashMessage(SUCCESS_TYPE_MESSAGE, SUCCESS_SIGNUP_MESSAGE);
                 this.props.history.push("/");
@@ -124,7 +125,4 @@ SignupForm
     addFlashMessage: PropTypes.func.isRequired
 };
 
-export
-default
-
-withRouter(SignupForm);
+export default withRouter (SignupForm);
