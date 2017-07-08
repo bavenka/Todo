@@ -18,6 +18,14 @@ router.get('/email/:email', function (req, res, next) {
     });
 });
 
+router.get('/username/:username', function (req, res, next) {
+    User.findOne({username: req.params.username}, function (err, user) {
+        if (err)
+            return next(err);
+        res.status(200).send(user);
+    });
+});
+
 router.post('/', function (req, res, next) {
     var newUser = new User(
         {
