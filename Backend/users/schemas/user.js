@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-UserSchema = new Schema({
+const UserSchema = new Schema({
     username: {
         type: String,
         unique: true,
@@ -23,5 +23,4 @@ UserSchema = new Schema({
     }]
 });
 
-var User = mongoose.model('User', UserSchema);
-module.exports = User;
+module.exports = UserSchema;

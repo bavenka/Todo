@@ -1,4 +1,4 @@
-var express = require('express');
+import express from 'express'
 var path = require('path');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
@@ -7,8 +7,8 @@ var cors = require('cors');
 
 var DB = require('./DB_connection');
 
-var user = require('./routes/user');
-var todo = require('./routes/todo');
+var users = require('./users/routes/users');
+var todos = require('./todos/routes/todos');
 
 var app = express();
 
@@ -25,8 +25,8 @@ app.use(cors());
 //TODO stream API
 
 
-app.use('/api/user', user);
-app.use('/api/todo', todo);
+app.use('/api/user', users);
+app.use('/api/todo', todos);
 
 
 // catch 404 and forward to error handler
