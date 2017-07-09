@@ -1,5 +1,6 @@
 import React, {PropTypes, Component} from 'react';
 import classnames from 'classnames'
+import validateInput from '../validators/validate/validateInput'
 
 class LoginForm extends Component {
 
@@ -17,12 +18,27 @@ class LoginForm extends Component {
 
     onSubmit(event) {
         event.preventDefault();
+        if (this.isValid()) {
+            this.setState({errors: {}, isLoading: true});
+        }
+    }
+
+    isValid() {
+        const data = {
+            identifier: this.state.identifier,
+            password: this.state.password
+        };
+        const {errors, isValid} = validateInput(data);
+        if (!isValid) {
+            this.setState({errors})
+        }
+        return isValid;
     }
 
     onChange(event) {
         this.setState({[event.target.name]: event.target.value});
-
     }
+
 
     render() {
         const {errors, identifier, password, isLoading} = this.state;

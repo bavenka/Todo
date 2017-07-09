@@ -15,6 +15,9 @@ function validateInput (data) {
     if (lodash.isEmpty(data.email)) {
         errors.email = emptyFieldMessage;
     }
+    if (lodash.isEmpty(data.identifier)) {
+        errors.identifier = emptyFieldMessage;
+    }
 
     return {
         errors,
