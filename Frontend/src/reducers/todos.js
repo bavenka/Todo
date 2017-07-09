@@ -5,7 +5,7 @@ import {
     COMPLETE_ALL,
     CLEAR_COMPLETED,
     EDIT_TODO,
-    REQUEST_TODOS,
+
     RECEIVE_TODOS
 } from '../constants/ActionTypes'
 
