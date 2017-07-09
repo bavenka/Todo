@@ -4,7 +4,7 @@ import logger from 'morgan';
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
 
-import {connect} from './DB_connection';
+import {connect} from './utils/DB_connection';
 import {DB_URL} from './constants/index';
 import cors from 'cors';
 import users from './users/routes/users';
