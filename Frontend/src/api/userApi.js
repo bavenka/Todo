@@ -22,16 +22,27 @@ export const saveUser = async (user) => {
 
 export const getUserByEmail = async (email) => {
 
-    const response = await fetch(SERVER_URL + '/user/email/' + email, {
-        method: 'GET',
-        body: {}
-    });
+    const response = await fetch(SERVER_URL + '/user/email/' + email);
     if (response.status !== 200) {
         throw new Error('Looks like there was a problem. Status Code: ' +
             response.status);
     }
     if (response.headers.get('content-type')) {
        return await response.json();
+    }
+
+    return {};
+};
+
+export const getUserByUsername = async (username) => {
+
+    const response = await fetch(SERVER_URL + '/user/username/' + username);
+    if (response.status !== 200) {
+        throw new Error('Looks like there was a problem. Status Code: ' +
+            response.status);
+    }
+    if (response.headers.get('content-type')) {
+        return await response.json();
     }
 
     return {};
