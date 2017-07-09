@@ -1,6 +1,6 @@
-const putTodo = require('../services/putTodo');
+import putTodo from '../services/putTodo';
 
-module.exports = function (req, res, next) {
+export  default function (req, res, next) {
     putTodo(req.body.id, req.body.text, req.body.user_id, req.body.completed).then(todo => {
         res.status(202).json(todo);
     }).catch(err => {

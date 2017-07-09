@@ -1,5 +1,5 @@
-const TODO = require('../models/todo');
+import TODO from '../models/todo';
 
-module.exports = function (userId) {
+export default function (userId) {
     return TODO.find({user: userId});
 };

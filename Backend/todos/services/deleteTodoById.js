@@ -1,5 +1,5 @@
-const TODO = require('../models/todo');
+import TODO from '../models/todo';
 
-module.exports = async function (id) {
+export default async function (id) {
     return TODO.findById(id).remove();
 };

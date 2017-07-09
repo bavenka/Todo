@@ -1,5 +1,4 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+import {Schema}  from 'mongoose';
 
 const TODOSchema = new Schema({
     text: {
@@ -17,4 +16,4 @@ const TODOSchema = new Schema({
     }
 });
 
-module.exports = TODOSchema;
+export default TODOSchema;

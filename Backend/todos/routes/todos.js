@@ -1,41 +1,41 @@
-const express = require('express');
-const router = express.Router();
-let validate = require('express-validation');
+import express from 'express';
+import validate from 'express-validation';
+let router = express.Router();
 
-//Validators
-const getTodosByUserIdValidator = require('../validators/getTodosByUserId');
-const postTodo = require('../validators/postTodo');
-const putTodo = require('../validators/putTodo');
-const putTodoChangeCompletedById = require('../validators/putTodoChangeCompletedById');
-const putCompleteAllByUserId = require('../validators/putCompleteAllByUserId');
-const deleteClearCompletedByUserId = require('../validators/deleteClearCompletedByUserId');
-const deleteById = require('../validators/deleteTodoById');
+import {
+    getTodosByUserIdValidator,
+    postTodoValidator,
+    putTodoValidator,
+    putTodoChangeCompletedByIdValidator,
+    putCompleteAllByUserIdValidator,
+    deleteClearCompletedByUserIdValidator
+} from '../validators/index';
 
-//Controllers
-const getTodosController = require('../controllers/getTodos');
-const getTodosByUserIdController = require('../controllers/getTodosByUserId');
-const postTodoController = require('../controllers/postTodo');
-const putTodoController = require('../controllers/putTodo');
-const putTodoChangeCompletedByIdController = require('../controllers/putTodoChangeCompletedById');
-const putCompleteAllByUserIdController = require('../controllers/putCompleteAllByUserId');
-const deleteClearCompletedByUserIdController = require('../controllers/deleteClearCompletedByUserId');
-const deleteTodoByIdController = require('../controllers/deleteTodoById');
-
+import {
+    getTodosController,
+    getTodosByUserIdController,
+    postTodoController,
+    putTodoController,
+    putTodoChangeCompletedByIdController,
+    putCompleteAllByUserIdController,
+    deleteClearCompletedByUserIdController,
+    deleteTodoByIdController
+} from '../controllers/index';
 
 router.get('/', getTodosController);
 
 router.get('/:userId', validate(getTodosByUserIdValidator), getTodosByUserIdController);
 
-router.post('/', validate(postTodo), postTodoController);
+router.post('/', validate(postTodoValidator), postTodoController);
 
-router.put('/', validate(putTodo), putTodoController);
+router.put('/', validate(putTodoValidator), putTodoController);
 
-router.put('/changeCompleted/:id', validate(putTodoChangeCompletedById), putTodoChangeCompletedByIdController);
+router.put('/changeCompleted/:id', validate(putTodoChangeCompletedByIdValidator), putTodoChangeCompletedByIdController);
 
-router.put('/completeAll/:user_id', validate(putCompleteAllByUserId), putCompleteAllByUserIdController);
+router.put('/completeAll/:user_id', validate(putCompleteAllByUserIdValidator), putCompleteAllByUserIdController);
 
-router.delete('/clearCompleted/:user_id', validate(deleteClearCompletedByUserId), deleteClearCompletedByUserIdController);
+router.delete('/clearCompleted/:user_id', validate(deleteClearCompletedByUserIdValidator), deleteClearCompletedByUserIdController);
 
-router.delete('/:id', validate(deleteById), deleteTodoByIdController);
+router.delete('/:id', validate(deleteTodoByIdController), deleteTodoByIdController);
 
-module.exports = router;
+export default router;

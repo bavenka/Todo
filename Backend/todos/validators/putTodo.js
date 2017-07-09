@@ -1,10 +1,10 @@
-const Joi = require('joi');
+import Joi from 'joi';
 
-module.exports = {
+export default {
     body: {
         id: Joi.string().required(),
         text: Joi.string(),
         completed: Joi.boolean(),
         user_id: Joi.string(),
-    },
+    }
 };

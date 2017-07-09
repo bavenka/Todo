@@ -1,6 +1,6 @@
-const TODO = require('../models/todo');
+import TODO from '../models/todo';
 
-module.exports = function (id, text, userId, completed) {
+export  default function (id, text, userId, completed) {
 
     let newTodo = {};
     if (text) {

@@ -1,7 +1,7 @@
-const Joi = require('joi');
+import Joi from 'joi';
 
-module.exports = {
+export default {
     params: {
         user_id: Joi.string().required(),
-    },
+    }
 };

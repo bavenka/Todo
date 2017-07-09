@@ -1,7 +1,7 @@
-const Joi = require('joi');
+import Joi from 'joi';
 
-module.exports = {
+export default {
     params: {
         id: Joi.string().required(),
-    },
+    }
 };

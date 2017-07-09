@@ -1,7 +1,9 @@
-const getTodos = require('../services/getTodos');
+import getTodos from '../services/getTodos';
 
-module.exports = function (req, res, next) {
+export default function (req, res, next) {
     getTodos().then(todos => {
         res.status(200).json(todos);
+    }).catch(err => {
+        res.status(500).send(err);
     });
 };

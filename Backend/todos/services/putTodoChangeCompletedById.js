@@ -1,6 +1,6 @@
-const TODO = require('../models/todo');
+import TODO from '../models/todo';
 
-module.exports = function (id) {
+export default function (id) {
     return TODO.findById(id).then(todo => {
         todo.completed = !todo.completed;
         return todo.save();

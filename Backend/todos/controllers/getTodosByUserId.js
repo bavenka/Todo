@@ -1,6 +1,6 @@
-const getTodosByUserId = require('../services/getTodosByUserId');
+import getTodosByUserId from '../services/getTodosByUserId';
 
-module.exports = function (req, res, next) {
+export default function (req, res, next) {
     getTodosByUserId(req.params.userId).then(todos => {
         res.status(200).json(todos);
     }).catch(err => {
