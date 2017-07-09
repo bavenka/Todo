@@ -24,11 +24,16 @@ export const getUserByEmail = async (email) => {
 
     const response = await fetch(SERVER_URL + '/user/email/' + email, {
         method: 'GET',
+        body: {}
     });
     if (response.status !== 200) {
         throw new Error('Looks like there was a problem. Status Code: ' +
             response.status);
     }
-    return await response.json();
+    if (response.headers.get('content-type')) {
+       return await response.json();
+    }
+
+    return {};
 };
 
