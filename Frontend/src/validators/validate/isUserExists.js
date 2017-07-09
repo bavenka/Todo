@@ -1,4 +1,4 @@
-import {getUserByEmail} from '../../api/userApi'
+import {getUserByEmail, getUserByUsername} from '../../api/userApi'
 import lodash from 'lodash'
 
 async function checkUsernameExists(field, data) {
@@ -18,6 +18,15 @@ async function checkUsernameExists(field, data) {
                 throw e;
             }
             break;
+        case 'username':
+            try {
+                user = await getUserByUsername(data);
+                if (!lodash.isEmpty(user)) {
+                    errors.username = 'There is user with such username.';
+                }
+            } catch (e) {
+                throw e;
+            }
     }
     return {
         errors,
