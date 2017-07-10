@@ -11,7 +11,7 @@ export const fetchTodosByUserId = (userId) => (dispatch) => {
         .then(response => checkStatusCode(response))
         .then(response => response.json())
         .then(todos => dispatch(receiveTodos(todos)))
-        .catch((err) => {
-            throw err;
+        .catch((response) => {
+            throw response.error;
         });
 };
