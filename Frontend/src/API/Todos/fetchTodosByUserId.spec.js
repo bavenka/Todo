@@ -1,4 +1,3 @@
-/*
 import configureMockStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
 import {fetchTodosByUserId} from './fetchTodosByUserId'
@@ -17,35 +16,29 @@ describe('async actions', () => {
     it('RECEIVE_TODOS', () => {
 
         nock('http://127.0.0.1:3000')
-            .get('/api/todo/')
-            .reply(200, {
-                body: {
-                    todos: [
-                        {
-                            "_id": "595d23da561a51155491d016",
-                            "text": "1",
-                            "completed": false,
-                            "user": fake_user_id,
-                            "__v": 0
-                        }
-                    ]
-                }
-            });
+            .get('/api/todo/' + fake_user_id)
+            .reply(200,
+                [{
+                    "_id": "595d23da561a51155491d016",
+                    "text": "1",
+                    "completed": false,
+                    "user": fake_user_id,
+                    "__v": 0
+                }]
+            );
 
         const expectedActions = [
             {
                 type: RECEIVE_TODOS,
-                body: {
-                    todos: [
-                        {
-                            "_id": "595d23da561a51155491d016",
-                            "text": "1",
-                            "completed": false,
-                            "user": fake_user_id,
-                            "__v": 0
-                        }
-                    ]
-                }
+                todos: [
+                    {
+                        "_id": "595d23da561a51155491d016",
+                        "text": "1",
+                        "completed": false,
+                        "user": fake_user_id,
+                        "__v": 0
+                    }
+                ]
             }
         ];
         const store = mockStore({todos: []});
@@ -55,4 +48,4 @@ describe('async actions', () => {
             expect(store.getActions()).toEqual(expectedActions);
         })
     })
-});*/
+});
