@@ -91,19 +91,25 @@ class SignupForm extends React.Component {
         if (this.isValid()) {
             try {
                 const response = await this.props.createUser(this.state.user);
-                if (response.status === 201) {
-                    this.setState({errors: {}, isLoading: true});
-                    this.props.addFlashMessage(SUCCESS_TYPE_MESSAGE, SUCCESS_SIGNUP_MESSAGE);
-                    this.props.history.push("/");
-                }
-                if (response.status === 409) {
-                    const body = await response.body;
-                    const cause = this.conflictCauseDetermination(body);
-                    this.validateEmailAndUsernameOnUniqueness(cause);
-                }
+                this.setState({errors: {}, isLoading: true});
+                this.props.addFlashMessage(SUCCESS_TYPE_MESSAGE, SUCCESS_SIGNUP_MESSAGE);
+                this.props.history.push("/");
             }
             catch (e) {
-                this.props.addFlashMessage(ERROR_TYPE_MESSAGE, e.message);
+                if (e instanceof Response) {
+                    if (e.status === 409) {
+                        const body = await e.json();
+                        const cause = this.conflictCauseDetermination(body);
+                        this.validateEmailAndUsernameOnUniqueness(cause);
+                        return;
+                    }
+                    else {
+                        this.props.addFlashMessage(ERROR_TYPE_MESSAGE, e.statusText + '. '
+                            + 'Status Code: ' + e.status);
+                        return;
+                    }
+                }
+                this.props.addFlashMessage(ERROR_TYPE_MESSAGE, 'Name: ' + e.name + '. Message: ' + e.message + '.');
             }
         }
     }
