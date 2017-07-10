@@ -9,7 +9,14 @@ import {
     deleteUserByIdController,
     deleteUserByEmailController
 } from '../controllers/index'
-import {getUserByEmailValidator} from '../validators/index'
+import {
+    getUserByEmailValidator,
+    getUserByUsernameValidator,
+    postUserValidator,
+    putUserValidator,
+    deleteUserByIdValidator,
+    deleteUserByEmailValidator
+} from '../validators/index'
 
 let router = express.Router();
 
@@ -17,14 +24,14 @@ router.get('/', getUsersController);
 
 router.get('/email/:email', validate(getUserByEmailValidator), getUserByEmailController);
 
-router.get('/username/:username', getUserByUsernameController);
+router.get('/username/:username', validate(getUserByUsernameValidator), getUserByUsernameController);
 
-router.post('/', postUserController);
+router.post('/', validate(postUserValidator), postUserController);
 
-router.put('/', putUserController);
+router.put('/', validate(putUserValidator), putUserController);
 
-router.delete('/:id', deleteUserByIdController);
+router.delete('/:id', validate(deleteUserByIdValidator), deleteUserByIdController);
 
-router.delete('/email/:email', deleteUserByEmailController);
+router.delete('/email/:email', validate(deleteUserByEmailValidator), deleteUserByEmailController);
 
 export default router;
