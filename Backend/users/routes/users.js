@@ -24,7 +24,19 @@ router.get('/', getUsersController);
 
 router.get('/email/:email', validate(getUserByEmailValidator), getUserByEmailController);
 
-router.get('/username/:username', validate(getUserByUsernameValidator), getUserByUsernameController);
+router.post('/', function (req, res, next) {
+    var newUser = new User(
+        {
+            username: req.body.username,
+            email: req.body.email,
+            password: req.body.password
+        });
+    newUser.save(function (err, newUser) {
+        if (err)
+            res.status(409).send(err);
+        res.status(201).send(newUser);
+    });
+});
 
 router.post('/', validate(postUserValidator), postUserController);
 

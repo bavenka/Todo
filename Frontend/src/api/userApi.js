@@ -1,7 +1,8 @@
 import {SERVER_URL} from '../constants/ActionTypes'
+import checkStatusCode from './checkStatusCode'
 
 export const saveUser = async (user) => {
-    const response = await fetch(SERVER_URL + '/user', {
+    let response = await fetch(SERVER_URL + '/user', {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
@@ -13,11 +14,15 @@ export const saveUser = async (user) => {
             username: user.username,
         })
     });
-    if (response.status === 409) {
-        throw new Error('There is user with such email.');
+    try {
+        return {status: await checkStatusCode(response).status};
     }
-    if (response.status === 201) {
-        return response;
+    catch (e) {
+        if (e instanceof Response) {
+            return {status: e.status, body: e.json()};
+        } else {
+            throw e;
+        }
     }
 };
 
