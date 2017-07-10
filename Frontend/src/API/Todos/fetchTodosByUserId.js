@@ -1,5 +1,6 @@
 import receiveTodos from '../../actions/receiveTodosAction'
 import fetch from 'isomorphic-fetch'
+import checkStatusCode from '../checkStatusCode'
 
 export const fetchTodosByUserId = (userId) => (dispatch) => {
 
@@ -7,15 +8,9 @@ export const fetchTodosByUserId = (userId) => (dispatch) => {
         {
             method: 'GET',
         })
-        .then(response => {
-            if (response.status === 200) //TODO !!! надо ли обновлять элементы если статус 304? //|| response.status == 304
-                return response.json();
-            else
-                throw response.error;
-        })
-        .then(todos => {
-            dispatch(receiveTodos(todos))
-        })
+        .then(response => checkStatusCode(response))
+        .then(response => response.json())
+        .then(todos => dispatch(receiveTodos(todos)))
         .catch((err) => {
             throw err;
         });
