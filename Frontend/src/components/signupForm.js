@@ -1,9 +1,8 @@
 import React, {PropTypes} from 'react';
 import classnames from 'classnames'
 import validateInput from '../validators/validate/validateInput'
-import checkUserExists from '../validators/validate/isUserExists'
 import {withRouter} from 'react-router-dom'
-import {connect} from 'react-redux'
+import lodash from 'lodash'
 
 import {
     SUCCESS_SIGNUP_MESSAGE,
@@ -27,20 +26,19 @@ class SignupForm extends React.Component {
         };
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
-        this.onBlur = this.onBlur.bind(this);
     }
 
-    async onBlur(event) {
-        this.setState({errors: {}});
-        const field = event.target.name;
-        const value = event.target.value;
-        if (value !== '') {
-            const {errors, isUserExists} = await checkUserExists(field, value);
-            if (isUserExists) {
-                this.setState({errors})
-            }
-        }
-    }
+    /*   async onBlur(event) {
+     this.setState({errors: {}});
+     const field = event.target.name;
+     const value = event.target.value;
+     if (value !== '') {
+     const {errors, isUserExists} = await checkUserExists(field, value);
+     if (isUserExists) {
+     this.setState({errors})
+     }
+     }
+     }*/
 
     isValid() {
         const {errors, isValid} = validateInput(this.state.user);
@@ -60,19 +58,52 @@ class SignupForm extends React.Component {
         })
     }
 
+    conflictCauseDetermination(body) {
+        let cause = null;
+        if (body.errmsg.includes('username')) {
+            cause = 'username';
+        }
+        if (body.errmsg.includes('email')) {
+            cause = 'email';
+        }
+        return cause;
+    }
+
+    validateEmailAndUsernameOnUniqueness(data) {
+        let errors = {};
+        switch (data) {
+            case 'username' :
+                errors.username = 'There is user with such username.';
+                this.setState({errors});
+                break;
+            case 'email':
+                errors.email = 'There is user with such email.';
+                this.setState({errors});
+                break;
+            default:
+                throw new Error;
+        }
+    }
+
 
     async onSubmit(event) {
         event.preventDefault();
         if (this.isValid()) {
             try {
-                await this.props.createUser(this.state.user);
-                this.setState({errors: {}, isLoading: true});
-                this.props.addFlashMessage(SUCCESS_TYPE_MESSAGE, SUCCESS_SIGNUP_MESSAGE);
-                this.props.history.push("/");
+                const response = await this.props.createUser(this.state.user);
+                if (response.status === 201) {
+                    this.setState({errors: {}, isLoading: true});
+                    this.props.addFlashMessage(SUCCESS_TYPE_MESSAGE, SUCCESS_SIGNUP_MESSAGE);
+                    this.props.history.push("/");
+                }
+                if (response.status === 409) {
+                    const body = await response.body;
+                    const cause = this.conflictCauseDetermination(body);
+                    this.validateEmailAndUsernameOnUniqueness(cause);
+                }
             }
             catch (e) {
-                console.log(e);
-                this.props.addFlashMessage(ERROR_TYPE_MESSAGE, ERROR_SIGNUP_MESSAGE);
+                this.props.addFlashMessage(ERROR_TYPE_MESSAGE, e.message);
             }
         }
     }
@@ -89,7 +120,6 @@ class SignupForm extends React.Component {
                     <input type="text" name="username"
                            value={this.state.user.username}
                            onChange={this.onChange}
-                           onBlur={this.onBlur}
                            className="form-control"/>
                     {errors.username && <span className="help-block">{errors.username}</span>}
                 </div>
@@ -97,7 +127,6 @@ class SignupForm extends React.Component {
                     <label className="control-label">Email</label>
                     <input type="email" name="email"
                            value={this.state.user.email}
-                           onBlur={this.onBlur}
                            onChange={this.onChange}
                            className="form-control"/>
                     {errors.email && <span className="help-block">{errors.email}</span>}
@@ -126,4 +155,4 @@ SignupForm
     addFlashMessage: PropTypes.func.isRequired
 };
 
-export default withRouter (SignupForm);
+export default withRouter(SignupForm);
