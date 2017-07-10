@@ -15,10 +15,11 @@ export default function createUser(data) {
         }
 
         try {
-            const success = await userApi.saveUser(data);
-            return onSuccess(success);
+            const response = await userApi.saveUser(data);
+            return onSuccess(response);
         } catch (error) {
-            return onError(error);
+            onError(error);
+            throw error;
         }
     }
 }
