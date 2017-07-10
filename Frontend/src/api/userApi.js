@@ -2,29 +2,47 @@ import {SERVER_URL} from '../constants/ActionTypes'
 import checkStatusCode from './checkStatusCode'
 
 export const saveUser = async (user) => {
-    let response = await fetch(SERVER_URL + '/user', {
-        method: 'POST',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            email: user.email,
-            password: user.password,
-            username: user.username,
-        })
-    });
     try {
-        return {status: await checkStatusCode(response).status};
+        let response = await fetch(SERVER_URL + '/user', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                email: user.email,
+                password: user.password,
+                username: user.username,
+            })
+        });
+        return await checkStatusCode(response);
     }
     catch (e) {
-        if (e instanceof Response) {
-            return {status: e.status, body: e.json()};
-        } else {
-            throw e;
-        }
+        throw e;
     }
 };
+
+export const getToken = async (identifier, password) => {
+    try {
+        let response = await fetch(SERVER_URL + '/auth', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                identifier: identifier,
+                password: password
+            })
+        });
+        response = await checkStatusCode(response);
+        return await response.json().get('token');
+    }
+    catch (e) {
+        throw e;
+    }
+};
+
 
 /*export const getUserByEmail = async (email) => {
 
