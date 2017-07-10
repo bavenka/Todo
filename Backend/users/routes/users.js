@@ -1,22 +1,16 @@
-var express = require('express');
-var router = express.Router();
-var User = require('../models/user');
+import express from 'express'
+import validate from 'express-validation';
+import User from '../models/user'
+import {
+    getUsers,
+    getUserByEmail
+} from '../controllers/index'
 
-router.get('/', function (req, res, next) {
-    User.find(function (err, users) {
-        if (err)
-            return next(err);
-        res.status(200).send(users);
-    });
-});
+let router = express.Router();
 
-router.get('/email/:email', function (req, res, next) {
-    User.findOne({email: req.params.email}, function (err, user) {
-        if (err)
-            return next(err);
-        res.status(200).send(user);
-    });
-});
+router.get('/', getUsers);
+
+router.get('/email/:email', getUserByEmail);
 
 router.get('/username/:username', function (req, res, next) {
     User.findOne({username: req.params.username}, function (err, user) {
@@ -34,9 +28,12 @@ router.post('/', function (req, res, next) {
             password: req.body.password
         });
     newUser.save(function (err, newUser) {
-        if (err)
+        if (err) {
             res.status(409).send(err);
-        res.status(201).send(newUser);
+        }
+        else {
+            res.status(201).send(newUser);
+        }
     });
 });
 
@@ -74,4 +71,4 @@ router.delete('/email/:email', function (req, res, next) {
     });
 });
 
-module.exports = router;
+export default router;
