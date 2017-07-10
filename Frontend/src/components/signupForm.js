@@ -59,14 +59,14 @@ class SignupForm extends React.Component {
     }
 
     conflictCauseDetermination(body) {
-        let determination = null;
+        let cause = null;
         if (body.errmsg.includes('username')) {
-            determination = 'username';
+            cause = 'username';
         }
         if (body.errmsg.includes('email')) {
-            determination = 'email';
+            cause = 'email';
         }
-        return determination;
+        return cause;
     }
 
     validateEmailAndUsernameOnUniqueness(data) {
@@ -98,8 +98,8 @@ class SignupForm extends React.Component {
                 }
                 if (response.status === 409) {
                     const body = await response.body;
-                    const determination = this.conflictCauseDetermination(body);
-                    this.validateEmailAndUsernameOnUniqueness(determination);
+                    const cause = this.conflictCauseDetermination(body);
+                    this.validateEmailAndUsernameOnUniqueness(cause);
                 }
             }
             catch (e) {
