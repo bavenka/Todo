@@ -1,2 +1,7 @@
 export {default as getUsers} from  './getUsers'
 export {default as getUserByEmail} from  './getUserByEmail'
+export {default as getUserByUsername} from  './getUserByUsername'
+export {default as postUser} from  './postUser'
+export {default as putUser} from  './putUser'
+export {default as deleteUserById} from  './deleteUserById'
+export {default as deleteUserByEmail} from  './deleteUserByEmail'

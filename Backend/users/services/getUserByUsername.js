@@ -1,3 +1,5 @@
-/**
- * Created by MIKL on 10.07.2017.
- */
+import User from '../models/user';
+
+export default function (username) {
+    return User.findOne({username: username});
+};

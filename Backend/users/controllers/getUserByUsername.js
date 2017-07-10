@@ -1,3 +1,9 @@
-/**
- * Created by MIKL on 10.07.2017.
- */
+import getUserByUsername from '../services/getUserByUsername';
+
+export default function (req, res, next) {
+    getUserByUsername(req.params.username).then(user => {
+        res.status(200).json(user);
+    }).catch(err => {
+        res.status(500).send(err);
+    });
+};
