@@ -1,4 +1,5 @@
 import deleteTodoAction from '../../actions/deleteTodoAction'
+import checkStatusCode from '../checkStatusCode'
 
 const deleteTodo = (id) => (dispatch) => {
 
@@ -6,10 +7,8 @@ const deleteTodo = (id) => (dispatch) => {
         {
             method: 'delete',
         })
-        .then(response => {
-            if (response.status === 200)
-                dispatch(deleteTodoAction(id))
-        })
+        .then(response => checkStatusCode(response))
+        .then(response => dispatch(deleteTodoAction(id)))
         .catch((err) => {
             throw err;
         });

@@ -1,5 +1,6 @@
-import {fake_user_id} from '../../constants/fakeUser';
-import clearCompletedAction from '../../actions/clearCompletedAction';
+import {fake_user_id} from '../../constants/fakeUser'
+import clearCompletedAction from '../../actions/clearCompletedAction'
+import checkStatusCode from '../checkStatusCode'
 
 const clearCompleted = (userId) => (dispatch) => {
     //TODO передовать user_id текущего пользователя
@@ -8,10 +9,8 @@ const clearCompleted = (userId) => (dispatch) => {
         {
             method: 'delete',
         })
-        .then(response => {
-            if (response.status === 200)
-                dispatch(clearCompletedAction());
-        })
+        .then(response => checkStatusCode(response))
+        .then(response => dispatch(clearCompletedAction()))
         .catch((err) => {
             throw err;
         });

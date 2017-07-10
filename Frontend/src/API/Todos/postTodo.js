@@ -1,4 +1,5 @@
 import addTodo from '../../actions/addTodoAction'
+import checkStatusCode from '../checkStatusCode'
 
 export const postTodo = (userId, text, completed) => (dispatch) => {
 
@@ -14,6 +15,7 @@ export const postTodo = (userId, text, completed) => (dispatch) => {
                 'user_id': userId,
             })
         })
+        .then(response => checkStatusCode(response))
         .then(response => response.json())
         .then(todo => {
             dispatch(addTodo(todo._id, todo.text))

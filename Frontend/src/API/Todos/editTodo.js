@@ -1,4 +1,5 @@
 import editTodoAction from '../../actions/editTodoAction'
+import checkStatusCode from '../checkStatusCode'
 
 const editTodo = (id, text) => (dispatch) => {
 
@@ -13,6 +14,7 @@ const editTodo = (id, text) => (dispatch) => {
                 'id': id,
             })
         })
+        .then(response => checkStatusCode(response))
         .then(response => response.json())
         .then(todo => {
             dispatch(editTodoAction(todo._id, todo.text))

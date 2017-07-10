@@ -1,5 +1,6 @@
-import {fake_user_id} from '../../constants/fakeUser';
-import completeAllAction from '../../actions/completeAllAction';
+import {fake_user_id} from '../../constants/fakeUser'
+import completeAllAction from '../../actions/completeAllAction'
+import checkStatusCode from '../checkStatusCode'
 
 //TODO передовать user_id текущего пользователя
 export const completeAll = (userId) => (dispatch) => {
@@ -8,10 +9,8 @@ export const completeAll = (userId) => (dispatch) => {
         {
             method: 'put',
         })
-        .then(response => {
-            if (response.status === 202)
-                dispatch(completeAllAction())
-        })
+        .then(response => checkStatusCode(response))
+        .then(response => dispatch(completeAllAction()))
         .catch((err) => {
             throw err;
         });
