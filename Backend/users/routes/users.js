@@ -20,7 +20,7 @@ import {
 } from '../validators/index'
 
 import User from '../models/user'
-import authorization from '../midlevere/authorization'
+import authorization from '../../middleware/authorization'
 import {Secret} from '../../constants/index'
 
 let router = express.Router();

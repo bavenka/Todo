@@ -20,7 +20,7 @@ import {
     deleteTodoByIdController
 } from '../controllers/index'
 
-import authorization from '../../users/midlevere/authorization'
+import authorization from '../../middleware/authorization'
 
 let router = express.Router();
 

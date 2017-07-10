@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken'
-import {Secret} from '../../constants/index'
+import {Secret} from '../constants/index'
 
 export default function authorize(req, res, next) {
 

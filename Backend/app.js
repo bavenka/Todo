@@ -12,7 +12,7 @@ import {DB_URL} from './constants/index'
 import users from './users/routes/users'
 import todos from './todos/routes/todos'
 
-import authenticate from './users/midlevere/authorization'
+import authenticate from './middleware/authorization'
 
 let app = express();
 
