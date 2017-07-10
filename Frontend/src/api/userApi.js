@@ -13,38 +13,40 @@ export const saveUser = async (user) => {
             username: user.username,
         })
     });
-    if (response.status !== 201) {
-        throw new Error('Looks like there was a problem. Status Code: ' +
-            response.status);
+    if (response.status === 409) {
+        throw new Error('There is user with such email.');
     }
-    return response;
+    if (response.status === 201) {
+        return response;
+    }
 };
 
-export const getUserByEmail = async (email) => {
+/*export const getUserByEmail = async (email) => {
 
-    const response = await fetch(SERVER_URL + '/user/email/' + email);
-    if (response.status !== 200) {
-        throw new Error('Looks like there was a problem. Status Code: ' +
-            response.status);
-    }
-    if (response.headers.get('content-type')) {
-       return await response.json();
-    }
+ const response = await fetch(SERVER_URL + '/user/email/' + email);
+ /!* if (response.status !== 200) {
+ throw new Error('Looks like there was a problem. Status Code: ' +
+ response.status);
+ }*!/
+ if (response.headers.get('content-type')) {
+ return await response.json();
+ }
+ // else
 
-    return {};
-};
+ return {};
+ };*/
 
-export const getUserByUsername = async (username) => {
+/*export const getUserByUsername = async (username) => {
 
-    const response = await fetch(SERVER_URL + '/user/username/' + username);
-    if (response.status !== 200) {
-        throw new Error('Looks like there was a problem. Status Code: ' +
-            response.status);
-    }
-    if (response.headers.get('content-type')) {
-        return await response.json();
-    }
+ const response = await fetch(SERVER_URL + '/user/username/' + username);
+ if (response.status !== 200) {
+ throw new Error('Looks like there was a problem. Status Code: ' +
+ response.status);
+ }
+ if (response.headers.get('content-type')) {
+ return await response.json();
+ }
 
-    return {};
-};
+ return {};
+ };*/
 

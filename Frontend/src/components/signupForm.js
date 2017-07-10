@@ -71,6 +71,7 @@ class SignupForm extends React.Component {
                 this.props.history.push("/");
             }
             catch (e) {
+                console.log(e);
                 this.props.addFlashMessage(ERROR_TYPE_MESSAGE, ERROR_SIGNUP_MESSAGE);
             }
         }
