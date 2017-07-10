@@ -1,29 +1,30 @@
 import express from 'express'
 import validate from 'express-validation';
 import {
-    getUsers,
-    getUserByEmail,
-    getUserByUsername,
-    postUser,
-    putUser,
-    deleteUserById,
-    deleteUserByEmail
+    getUsersController,
+    getUserByEmailController,
+    getUserByUsernameController,
+    postUserController,
+    putUserController,
+    deleteUserByIdController,
+    deleteUserByEmailController
 } from '../controllers/index'
+import {getUserByEmailValidator} from '../validators/index'
 
 let router = express.Router();
 
-router.get('/', getUsers);
+router.get('/', getUsersController);
 
-router.get('/email/:email', getUserByEmail);
+router.get('/email/:email', validate(getUserByEmailValidator), getUserByEmailController);
 
-router.get('/username/:username', getUserByUsername);
+router.get('/username/:username', getUserByUsernameController);
 
-router.post('/', postUser);
+router.post('/', postUserController);
 
-router.put('/', putUser);
+router.put('/', putUserController);
 
-router.delete('/:id', deleteUserById);
+router.delete('/:id', deleteUserByIdController);
 
-router.delete('/email/:email', deleteUserByEmail);
+router.delete('/email/:email', deleteUserByEmailController);
 
 export default router;
