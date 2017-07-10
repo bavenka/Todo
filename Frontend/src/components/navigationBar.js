@@ -11,7 +11,8 @@ const NavigationBar = () => {
                    </div>
                    <div className="collapse navbar-collapse">
                        <ul className="nav navbar-nav navbar-right">
-                           <li><NavLink to="/signup">Sign up</NavLink></li>
+                           <li><NavLink to="/login">Log In</NavLink></li>
+                           <li><NavLink to="/signup">Sign Up</NavLink></li>
                        </ul>
                    </div>
                </div>

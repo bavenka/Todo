@@ -7,6 +7,7 @@ import {BrowserRouter, Route, Switch} from 'react-router-dom'
 import thunk from 'redux-thunk'
 import App from './components/app';
 import SignupPage from './components/signup'
+import LoginPage from './components/loginPage'
 import Content from './components/content'
 
 
@@ -23,6 +24,7 @@ render(
             <App>
                 <Switch>
                     <Route path="/signup" component={SignupPage}/>
+                    <Route path="/login" component={LoginPage}/>
                     <Route path="/:filter?" component={Content}/>
                 </Switch>
             </App>
