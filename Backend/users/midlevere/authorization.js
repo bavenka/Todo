@@ -1,7 +1,10 @@
 import jwt from 'jsonwebtoken'
 import {Secret} from '../../constants/index'
 
-export default function authorize (req, res, next) {
+export default function authorize(req, res, next) {
+
+    //TODO удалить для авторизации
+    return next();
 
     // check header or url parameters or post parameters for token
     const token = req.body.token || req.param('token');
