@@ -1,7 +1,5 @@
-import express from 'express';
-import validate from 'express-validation';
-let router = express.Router();
-
+import express from 'express'
+import validate from 'express-validation'
 import {
     getTodosByUserIdValidator,
     postTodoValidator,
@@ -9,7 +7,7 @@ import {
     putTodoChangeCompletedByIdValidator,
     putCompleteAllByUserIdValidator,
     deleteClearCompletedByUserIdValidator
-} from '../validators/index';
+} from '../validators/index'
 
 import {
     getTodosController,
@@ -20,22 +18,26 @@ import {
     putCompleteAllByUserIdController,
     deleteClearCompletedByUserIdController,
     deleteTodoByIdController
-} from '../controllers/index';
+} from '../controllers/index'
 
-router.get('/', getTodosController);
+import authorization from '../../users/midlevere/authorization'
 
-router.get('/:userId', validate(getTodosByUserIdValidator), getTodosByUserIdController);
+let router = express.Router();
 
-router.post('/', validate(postTodoValidator), postTodoController);
+router.get('/', authorization, getTodosController);
 
-router.put('/', validate(putTodoValidator), putTodoController);
+router.get('/:userId', authorization, validate(getTodosByUserIdValidator), getTodosByUserIdController);
 
-router.put('/changeCompleted/:id', validate(putTodoChangeCompletedByIdValidator), putTodoChangeCompletedByIdController);
+router.post('/', authorization, validate(postTodoValidator), postTodoController);
 
-router.put('/completeAll/:user_id', validate(putCompleteAllByUserIdValidator), putCompleteAllByUserIdController);
+router.put('/', authorization, validate(putTodoValidator), putTodoController);
 
-router.delete('/clearCompleted/:user_id', validate(deleteClearCompletedByUserIdValidator), deleteClearCompletedByUserIdController);
+router.put('/changeCompleted/:id', authorization, validate(putTodoChangeCompletedByIdValidator), putTodoChangeCompletedByIdController);
 
-router.delete('/:id', validate(deleteTodoByIdController), deleteTodoByIdController);
+router.put('/completeAll/:user_id', authorization, validate(putCompleteAllByUserIdValidator), putCompleteAllByUserIdController);
+
+router.delete('/clearCompleted/:user_id', authorization, validate(deleteClearCompletedByUserIdValidator), deleteClearCompletedByUserIdController);
+
+router.delete('/:id', authorization, validate(deleteTodoByIdController), deleteTodoByIdController);
 
 export default router;

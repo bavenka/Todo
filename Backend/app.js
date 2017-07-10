@@ -1,14 +1,18 @@
 import express from 'express'
-import path from 'path';
-import logger from 'morgan';
-import cookieParser from 'cookie-parser';
-import bodyParser from 'body-parser';
+import path from 'path'
+import logger from 'morgan'
+import cookieParser from 'cookie-parser'
+import bodyParser from 'body-parser'
 
-import {connect} from './utils/DB_connection';
-import {DB_URL} from './constants/index';
-import cors from 'cors';
-import users from './users/routes/users';
-import todos from './todos/routes/todos';
+import cors from 'cors'
+
+import {connect} from './utils/DB_connection'
+import {DB_URL} from './constants/index'
+
+import users from './users/routes/users'
+import todos from './todos/routes/todos'
+
+import authenticate from './users/midlevere/authorization'
 
 let app = express();
 
@@ -29,7 +33,7 @@ app.use('/api/todo', todos);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
-    var err = new Error('Not Found');
+    let err = new Error('Not Found');
     err.status = 404;
     next(err);
 });
