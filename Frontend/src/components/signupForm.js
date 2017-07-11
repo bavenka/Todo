@@ -97,19 +97,19 @@ class SignupForm extends React.Component {
             }
             catch (e) {
                 if (e instanceof Response) {
+                    let body = await e.json();
                     if (e.status === 409) {
-                        const body = await e.json();
                         const cause = this.conflictCauseDetermination(body);
                         this.validateEmailAndUsernameOnUniqueness(cause);
                         return;
                     }
                     else {
-                        this.props.addFlashMessage(ERROR_TYPE_MESSAGE, 'Name: ' + e.statusText + '. '
-                            + 'Status Code: ' + e.status);
+                        this.props.addFlashMessage(ERROR_TYPE_MESSAGE, 'Message: ' + JSON.stringify(body.errors) + '. '
+                            + 'Status Code: ' + body.status + '.');
                         return;
                     }
                 }
-                this.props.addFlashMessage(ERROR_TYPE_MESSAGE, 'Name: ' + e.name + '. Message: ' + e.message + '.');
+                this.props.addFlashMessage(ERROR_TYPE_MESSAGE, 'Message: ' + e.message + '.');
             }
         }
     }

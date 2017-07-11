@@ -23,19 +23,20 @@ class LoginForm extends Component {
         if (this.isValid()) {
             const {identifier, password} = this.state;
             try {
-                const response = await userApi.getToken((identifier, password));
+                const response = await userApi.getToken(identifier, password);
                 this.setState({errors: {}, isLoading: true});
             }
             catch (e) {
                 if (e instanceof Response) {
+                    let body = await e.json();
                     if (e.status === 404 || e.status === 409) {
                         const errors = {};
                         errors.form = BAD_CREDENTIALS;
                         this.setState({errors});
                         return;
                     } else {
-                        this.props.addFlashMessage(ERROR_TYPE_MESSAGE, 'Name: ' + e.statusText + '. '
-                            + 'Status Code: ' + e.status);
+                        this.props.addFlashMessage(ERROR_TYPE_MESSAGE, 'Message: ' + JSON.stringify(body.errors) + '. '
+                            + 'Status Code: ' + body.status + '.');
                         return;
                     }
                 }
