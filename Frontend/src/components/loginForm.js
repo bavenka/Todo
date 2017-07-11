@@ -3,6 +3,8 @@ import classnames from 'classnames'
 import validateInput from '../validators/validate/validateInput'
 import {ERROR_TYPE_MESSAGE, BAD_CREDENTIALS} from '../constants/ActionTypes'
 import * as userApi from '../api/userApi'
+import {withRouter} from 'react-router-dom'
+import Auth from '../utils/auth'
 
 class LoginForm extends Component {
 
@@ -23,8 +25,10 @@ class LoginForm extends Component {
         if (this.isValid()) {
             const {identifier, password} = this.state;
             try {
-                const response = await userApi.getToken(identifier, password);
+                const jwt = await userApi.getToken(identifier, password);
+                Auth.authenticateUser(jwt);
                 this.setState({errors: {}, isLoading: true});
+                this.props.history.push("/");
             }
             catch (e) {
                 if (e instanceof Response) {
@@ -93,4 +97,4 @@ class LoginForm extends Component {
     }
 }
 
-export default LoginForm;
+export default withRouter(LoginForm);
