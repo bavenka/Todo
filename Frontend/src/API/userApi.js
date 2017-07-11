@@ -24,19 +24,20 @@ export const saveUser = async (user) => {
 
 export const getToken = async (identifier, password) => {
     try {
-        let response = await fetch(SERVER_URL + '/auth', {
+        let response = await fetch(SERVER_URL + '/user/authorization', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                identifier: identifier,
+                username: identifier,
                 password: password
             })
         });
         response = await checkStatusCode(response);
-        return await response.json().get('token');
+        const body = await response.json();
+        return await body.token;
     }
     catch (e) {
         throw e;
