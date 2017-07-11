@@ -7,7 +7,7 @@ export default function authorize(req, res, next) {
     return next();
 
     // check header or url parameters or post parameters for token
-    const token = req.body.token || req.param('token');
+    const token = req.body.token || req.param('token') || req.get('Authorisation');
 
     // decode token
     if (token) {
