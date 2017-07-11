@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "server": "webpack-dev-server --content-base ./dist --inline --hot",
+    "start": "webpack-dev-server --content-base ./dist --inline --hot",
     "test": "jest",
     "test:watch": "npm test -- --watch"
   },
