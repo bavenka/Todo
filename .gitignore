@@ -1,3 +1,6 @@
 /Frontend/node_modules
 /Backend/node_modules
 /.idea
+/Backend/startDbLinux
+/Backend/package-lock.json
+/Frontend/package-lock.json
