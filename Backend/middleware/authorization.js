@@ -14,7 +14,7 @@ export default function authorize(req, res, next) {
         // verifies secret and checks exp
         jwt.verify(token, Secret, function (err, decoded) {
             if (err) {
-                return res.json({success: false, message: 'Failed to authorization token.'});
+                return res.sendStatus(401).json({success: false, message: 'Failed to authorization token.'});
             } else {
                 // if everything is good, save to request for use in other routes
                 req.decoded = decoded;
