@@ -2,7 +2,7 @@ import React, {PropTypes, Component} from 'react';
 import classnames from 'classnames'
 import validateInput from '../validators/validate/validateInput'
 import {ERROR_TYPE_MESSAGE, BAD_CREDENTIALS} from '../constants/ActionTypes'
-import * as userApi from '../api/userApi'
+import * as userApi from '../API/userApi'
 
 class LoginForm extends Component {
 
