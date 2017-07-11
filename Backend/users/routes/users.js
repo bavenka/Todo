@@ -50,6 +50,7 @@ router.post('/authorization', function (req, res, next) {
 
                     // if user is found and password is right
                     // create a token
+                    delete user.password;
                     var token = jwt.sign(user, Secret, {
                         expiresIn: 86400 // expires in 24 hours
                     });
@@ -73,7 +74,7 @@ router.get('/email/:email', authorization, validate(getUserByEmailValidator), ge
 
 router.get('/username/:username', authorization, validate(getUserByUsernameValidator), getUserByUsernameController);
 
-router.post('/', authorization, validate(postUserValidator), postUserController);
+router.post('/', validate(postUserValidator), postUserController);
 
 router.put('/', authorization, validate(putUserValidator), putUserController);
 
