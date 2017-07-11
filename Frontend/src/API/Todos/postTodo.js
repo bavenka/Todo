@@ -7,7 +7,8 @@ export const postTodo = (userId, text, completed) => (dispatch) => {
         {
             method: 'post',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': Auth.getUserToken()
             },
             body: JSON.stringify({
                 'text': text,

@@ -1,3 +1,5 @@
+import jwt from 'jsonwebtoken'
+
 class Auth {
 
     static authenticateUser(token) {
@@ -14,6 +16,10 @@ class Auth {
 
     static getUserToken() {
         return localStorage.getItem('token');
+    }
+
+    static decodeToken(token) {
+       return jwt.decode(token);
     }
 }
 export default Auth;

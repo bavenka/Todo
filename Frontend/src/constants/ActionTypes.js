@@ -18,3 +18,8 @@ export const SUCCESS_SIGNUP_MESSAGE = 'You signed up successfully. Welcome!';
 export const ERROR_SIGNUP_MESSAGE = 'Sign up error!';
 export const SUCCESS_TYPE_MESSAGE = 'success';
 export const ERROR_TYPE_MESSAGE = 'danger';
+//Log In
+export const LOGIN_USER_SUCCESS = 'LOGIN_USER_SUCCESS';
+export const LOGIN_USER_FAILURE = 'LOGIN_USER_FAILURE';
+export const BAD_CREDENTIALS = 'Bad credentials';
+export const SET_CURRENT_USER = 'SET_CURRENT_USER';
