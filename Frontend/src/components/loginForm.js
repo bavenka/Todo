@@ -5,6 +5,8 @@ import {ERROR_TYPE_MESSAGE, BAD_CREDENTIALS} from '../constants/ActionTypes'
 import * as userApi from '../api/userApi'
 import {withRouter} from 'react-router-dom'
 import Auth from '../utils/auth'
+import setCurrentUser from '../actions/setCurrentUser'
+import {connect} from 'react-redux'
 
 class LoginForm extends Component {
 
@@ -27,6 +29,8 @@ class LoginForm extends Component {
             try {
                 const jwt = await userApi.getToken(identifier, password);
                 Auth.authenticateUser(jwt);
+                let decodedToken = Auth.decodeToken(jwt);
+                this.props.setCurrentUser(decodedToken._doc);
                 this.setState({errors: {}, isLoading: true});
                 this.props.history.push("/");
             }
@@ -97,4 +101,4 @@ class LoginForm extends Component {
     }
 }
 
-export default withRouter(LoginForm);
+export default withRouter(connect(null, {setCurrentUser})(LoginForm));
