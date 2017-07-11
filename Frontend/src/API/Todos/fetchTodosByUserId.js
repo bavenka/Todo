@@ -1,12 +1,16 @@
 import receiveTodos from '../../actions/receiveTodosAction'
 import fetch from 'isomorphic-fetch'
 import checkStatusCode from '../checkStatusCode'
+import Auth from '../../utils/auth'
 
 export const fetchTodosByUserId = (userId) => (dispatch) => {
 
     return fetch(`http://127.0.0.1:3000/api/todo/` + userId,
         {
             method: 'GET',
+            headers: {
+                'Authorization': Auth.getUserToken()
+            },
         })
         .then(response => checkStatusCode(response))
         .then(response => response.json())
