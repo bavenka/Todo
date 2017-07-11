@@ -1,6 +1,8 @@
 import React, {PropTypes, Component} from 'react';
 import classnames from 'classnames'
 import validateInput from '../validators/validate/validateInput'
+import {ERROR_TYPE_MESSAGE, BAD_CREDENTIALS} from '../constants/ActionTypes'
+import * as userApi from '../api/userApi'
 
 class LoginForm extends Component {
 
@@ -16,10 +18,29 @@ class LoginForm extends Component {
         this.onSubmit = this.onSubmit.bind(this);
     }
 
-    onSubmit(event) {
+    async onSubmit(event) {
         event.preventDefault();
         if (this.isValid()) {
-            this.setState({errors: {}, isLoading: true});
+            const {identifier, password} = this.state;
+            try {
+                const response = await userApi.getToken((identifier, password));
+                this.setState({errors: {}, isLoading: true});
+            }
+            catch (e) {
+                if (e instanceof Response) {
+                    if (e.status === 404 || e.status === 409) {
+                        const errors = {};
+                        errors.form = BAD_CREDENTIALS;
+                        this.setState({errors});
+                        return;
+                    } else {
+                        this.props.addFlashMessage(ERROR_TYPE_MESSAGE, 'Name: ' + e.statusText + '. '
+                            + 'Status Code: ' + e.status);
+                        return;
+                    }
+                }
+                this.props.addFlashMessage(ERROR_TYPE_MESSAGE, 'Name: ' + e.name + '. Message: ' + e.message + '.');
+            }
         }
     }
 
@@ -36,6 +57,7 @@ class LoginForm extends Component {
     }
 
     onChange(event) {
+        this.setState({errors: {}});
         this.setState({[event.target.name]: event.target.value});
     }
 
@@ -45,6 +67,7 @@ class LoginForm extends Component {
         return (
             <form onSubmit={this.onSubmit}>
                 <h1>Log In</h1>
+                {errors.form && <div className="alert alert-danger">{errors.form}</div>}
                 <div className={classnames("form-group", {"has-error": errors.identifier})}>
                     <label className="control-label">Username or email</label>
                     <input type="text" name="identifier"
@@ -62,7 +85,7 @@ class LoginForm extends Component {
                     {errors.password && <span className="help-block">{errors.password}</span>}
                 </div>
                 <div className="form-group">
-                    <button className="btn btn-primary btn-lg" disabled={isLoading}>Submit</button>
+                    <button className="btn btn-primary btn-lg">Submit</button>
                 </div>
             </form>
         );

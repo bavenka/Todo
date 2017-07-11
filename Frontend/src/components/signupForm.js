@@ -2,7 +2,7 @@ import React, {PropTypes} from 'react';
 import classnames from 'classnames'
 import validateInput from '../validators/validate/validateInput'
 import {withRouter} from 'react-router-dom'
-import lodash from 'lodash'
+import * as userApi from '../api/userApi'
 
 import {
     SUCCESS_SIGNUP_MESSAGE,
@@ -90,7 +90,7 @@ class SignupForm extends React.Component {
         event.preventDefault();
         if (this.isValid()) {
             try {
-                const response = await this.props.createUser(this.state.user);
+                const response = await userApi.saveUser(this.state.user);
                 this.setState({errors: {}, isLoading: true});
                 this.props.addFlashMessage(SUCCESS_TYPE_MESSAGE, SUCCESS_SIGNUP_MESSAGE);
                 this.props.history.push("/");
@@ -104,7 +104,7 @@ class SignupForm extends React.Component {
                         return;
                     }
                     else {
-                        this.props.addFlashMessage(ERROR_TYPE_MESSAGE, e.statusText + '. '
+                        this.props.addFlashMessage(ERROR_TYPE_MESSAGE, 'Name: ' + e.statusText + '. '
                             + 'Status Code: ' + e.status);
                         return;
                     }

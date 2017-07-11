@@ -1,16 +1,17 @@
 import React, {PropTypes} from 'react';
 import LoginForm from './loginForm.js'
-import loginUser from '../actions/loginUser'
 import {connect} from 'react-redux'
+import addFlashMessage from '../actions/addFlashMessage'
 
-const LoginPage = ({loginUser}) => {
+const LoginPage = ({addFlashMessage}) => {
 
     return (
         <div className="row">
             <div className="col-md-4 col-md-offset-4">
-                <LoginForm onLogin={loginUser}/>
+                <LoginForm
+                           addFlashMessage={addFlashMessage}/>
             </div>
         </div>
     )
 };
-export default connect(null, {loginUser})(LoginPage);
+export default connect(null, {addFlashMessage})(LoginPage);
