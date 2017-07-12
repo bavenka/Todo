@@ -1,3 +1,4 @@
+export {default as getUserController} from  './getUser'
 export {default as getUsersController} from  './getUsers'
 export {default as getUserByEmailController} from  './getUserByEmail'
 export {default as getUserByUsernameController} from  './getUserByUsername'

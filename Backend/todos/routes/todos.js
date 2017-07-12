@@ -1,12 +1,10 @@
 import express from 'express'
 import validate from 'express-validation'
 import {
-    getTodosByUserIdValidator,
     postTodoValidator,
     putTodoValidator,
     putTodoChangeCompletedByIdValidator,
-    putCompleteAllByUserIdValidator,
-    deleteClearCompletedByUserIdValidator
+    deleteTodoByIdValidator
 } from '../validators/index'
 
 import {
@@ -24,9 +22,10 @@ import authorization from '../../middleware/authorization'
 
 let router = express.Router();
 
-router.get('/', authorization, getTodosController);
+//TODO Скрыть для безопасности (любой юзер имеет возможность получить всех пользователей)
+router.get('/all', authorization, getTodosController);
 
-router.get('/:userId', authorization, validate(getTodosByUserIdValidator), getTodosByUserIdController);
+router.get('/', authorization, getTodosByUserIdController);
 
 router.post('/', authorization, validate(postTodoValidator), postTodoController);
 
@@ -34,10 +33,12 @@ router.put('/', authorization, validate(putTodoValidator), putTodoController);
 
 router.put('/changeCompleted/:id', authorization, validate(putTodoChangeCompletedByIdValidator), putTodoChangeCompletedByIdController);
 
-router.put('/completeAll/:user_id', authorization, validate(putCompleteAllByUserIdValidator), putCompleteAllByUserIdController);
+/*Complete all todos of user by user id.*/
+router.put('/completeAll/', authorization, putCompleteAllByUserIdController);
 
-router.delete('/clearCompleted/:user_id', authorization, validate(deleteClearCompletedByUserIdValidator), deleteClearCompletedByUserIdController);
+/*Clear completed todos of user by user id.*/
+router.delete('/clearCompleted/', authorization, deleteClearCompletedByUserIdController);
 
-router.delete('/:id', authorization, validate(deleteTodoByIdController), deleteTodoByIdController);
+router.delete('/:id', authorization, validate(deleteTodoByIdValidator), deleteTodoByIdController);
 
 export default router;

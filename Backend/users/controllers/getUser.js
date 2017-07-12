@@ -1,7 +1,7 @@
-import getUserByEmail from '../services/getUserByEmail';
+import getUser from '../services/getUser';
 
 export default function (req, res, next) {
-    getUserByEmail(req.decodedToken.email).then(user => {
+    getUser(req.decodedToken.id).then(user => {
         res.status(200).json(user);
     }).catch(err => {
         res.status(500).send(err);

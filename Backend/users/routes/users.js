@@ -2,6 +2,7 @@ import express from 'express'
 import validate from 'express-validation'
 import jwt from 'jsonwebtoken'
 import {
+    getUserController,
     getUsersController,
     getUserByEmailController,
     getUserByUsernameController,
@@ -11,12 +12,8 @@ import {
     deleteUserByEmailController
 } from '../controllers/index'
 import {
-    getUserByEmailValidator,
-    getUserByUsernameValidator,
     postUserValidator,
-    putUserValidator,
-    deleteUserByIdValidator,
-    deleteUserByEmailValidator
+    putUserValidator
 } from '../validators/index'
 
 import User from '../models/user'
@@ -43,15 +40,17 @@ router.post('/authorization', function (req, res, next) {
                 res.status(404).json({success: false, message: 'Authentication failed. User not found.'});
             } else if (user) {
 
-                // check if password matches
                 if (user.password !== req.body.password) {
                     res.status(409).json({success: false, message: 'Authentication failed. Wrong password.'});
                 } else {
 
-                    // if user is found and password is right
-                    // create a token
-                    delete user.password;
-                    var token = jwt.sign(user, Secret, {
+                    const pureUser = {
+                        username: user.username,
+                        email: user.email,
+                        id: user._id
+                    };
+
+                    const token = jwt.sign(pureUser, Secret, {
                         expiresIn: 86400 // expires in 24 hours
                     });
 
@@ -68,18 +67,22 @@ router.post('/authorization', function (req, res, next) {
     }
 );
 
-router.get('/', authorization, getUsersController);
+//TODO Скрыть для безопасности (любой юзер имеет возможность получить всех пользователей)
+router.get('/all', authorization, getUsersController);
 
-router.get('/email/:email', authorization, validate(getUserByEmailValidator), getUserByEmailController);
+router.get('/', authorization, getUserController);
 
-router.get('/username/:username', authorization, validate(getUserByUsernameValidator), getUserByUsernameController);
+router.get('/email/', authorization, getUserByEmailController);
+
+router.get('/username/', authorization, getUserByUsernameController);
 
 router.post('/', validate(postUserValidator), postUserController);
 
 router.put('/', authorization, validate(putUserValidator), putUserController);
 
-router.delete('/:id', authorization, validate(deleteUserByIdValidator), deleteUserByIdController);
+/*Delete user by id.*/
+router.delete('/', authorization, deleteUserByIdController);
 
-router.delete('/email/:email', authorization, validate(deleteUserByEmailValidator), deleteUserByEmailController);
+router.delete('/email/', authorization, deleteUserByEmailController);
 
 export default router;
