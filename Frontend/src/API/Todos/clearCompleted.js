@@ -3,7 +3,7 @@ import checkStatusCode from '../checkStatusCode'
 import Auth from '../../utils/auth'
 import {SERVER_URL} from "../../constants/ActionTypes";
 
-const clearCompleted = (dispatch) => {
+const clearCompleted = () => (dispatch) => {
     return fetch(SERVER_URL + '/todo/clearCompleted/',
         {
             method: 'delete',
