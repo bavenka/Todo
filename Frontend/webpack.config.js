@@ -34,5 +34,9 @@ module.exports = {
                 filename: 'bundle.css'
             }
         )
-    ]
+    ],
+    node: {
+        net: 'empty',
+        dns: 'empty'
+    }
 };
