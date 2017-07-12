@@ -8,7 +8,7 @@ export default function authorize(req, res, next) {
     if (token) {
         jwt.verify(token, Secret, function (err, decoded) {
             if (err) {
-                return res.sendStatus(401).json({success: false, message: 'Failed to authorization token.'});
+                return res.status(401).json({success: false, message: 'Failed to authorization token.'});
             } else {
                 req.decodedToken = decoded;
                 next();
