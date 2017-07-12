@@ -19,7 +19,7 @@ class Auth {
     }
 
     static decodeToken(token) {
-       return jwt.decode(token);
+        return jwt.decode(token);
     }
 }
 export default Auth;

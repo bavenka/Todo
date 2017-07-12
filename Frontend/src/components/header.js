@@ -11,7 +11,7 @@ class Header extends React.Component {
                 <h1>Todos</h1>
                 <CompleteAll/>
                 <TodoTextInput onSave={(text) => this.props.onAddClick(text)}
-                               placeholder="What needs to be done?" />
+                               placeholder="What needs to be done?"/>
             </header>
         )
     }

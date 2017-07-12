@@ -9,7 +9,7 @@ const LoginPage = ({addFlashMessage}) => {
         <div className="row">
             <div className="col-md-4 col-md-offset-4">
                 <LoginForm
-                           addFlashMessage={addFlashMessage}/>
+                    addFlashMessage={addFlashMessage}/>
             </div>
         </div>
     )
