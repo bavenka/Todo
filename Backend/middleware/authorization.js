@@ -3,10 +3,7 @@ import {Secret} from '../constants/index'
 
 export default function authorize(req, res, next) {
 
-    //TODO удалить для авторизации
-   // return next();
-
-    const token = req.get('Authorisation');
+    const token = req.get('Authorization');
 
     if (token) {
         jwt.verify(token, Secret, function (err, decoded) {
@@ -18,6 +15,7 @@ export default function authorize(req, res, next) {
             }
         });
     } else {
+        console.error('No token provided.');
         return res.status(403).send({
             success: false,
             message: 'No token provided.'

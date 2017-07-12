@@ -1,9 +1,11 @@
 import deleteTodoAction from '../../actions/deleteTodoAction'
 import checkStatusCode from '../checkStatusCode'
 import Auth from '../../utils/auth'
+import {SERVER_URL} from "../../constants/ActionTypes";
+
 const deleteTodo = (id) => (dispatch) => {
 
-    return fetch(`http://127.0.0.1:3000/api/todo/` + id,
+    return fetch(SERVER_URL + '/todo/' + id,
         {
             method: 'delete',
             headers: {

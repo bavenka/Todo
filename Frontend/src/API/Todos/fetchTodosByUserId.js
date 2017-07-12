@@ -3,9 +3,9 @@ import fetch from 'isomorphic-fetch'
 import checkStatusCode from '../checkStatusCode'
 import Auth from '../../utils/auth'
 
-export const fetchTodosByUserId = (userId) => (dispatch) => {
+export const fetchTodosByUserId = () => (dispatch) => {
 
-    return fetch(`http://127.0.0.1:3000/api/todo/` + userId,
+    return fetch(`http://127.0.0.1:3000/api/todo`,
         {
             method: 'GET',
             headers: {

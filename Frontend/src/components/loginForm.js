@@ -2,7 +2,7 @@ import React, {PropTypes, Component} from 'react';
 import classnames from 'classnames'
 import validateInput from '../validators/validate/validateInput'
 import {ERROR_TYPE_MESSAGE, BAD_CREDENTIALS} from '../constants/ActionTypes'
-import * as userApi from '../api/userApi'
+import * as userApi from '../API/userApi'
 import {withRouter} from 'react-router-dom'
 import Auth from '../utils/auth'
 import setCurrentUser from '../actions/setCurrentUser'
@@ -30,7 +30,7 @@ class LoginForm extends Component {
                 const jwt = await userApi.getToken(identifier, password);
                 Auth.authenticateUser(jwt);
                 let decodedToken = Auth.decodeToken(jwt);
-                this.props.setCurrentUser(decodedToken._doc);
+                this.props.setCurrentUser(decodedToken);
                 this.setState({errors: {}, isLoading: true});
                 this.props.history.push("/");
             }

@@ -1,18 +1,16 @@
-import {fake_user_id} from '../../constants/fakeUser'
 import completeAllAction from '../../actions/completeAllAction'
 import checkStatusCode from '../checkStatusCode'
 import Auth from '../../utils/auth'
+import {SERVER_URL} from "../../constants/ActionTypes";
 
 //TODO передовать user_id текущего пользователя
-export const completeAll = (userId) => (dispatch) => {
-    userId = fake_user_id;
-    return fetch(`http://127.0.0.1:3000/api/todo/completeAll/` + userId,
+export const completeAll = (dispatch) => {
+    return fetch(SERVER_URL+'/todo/completeAll/',
         {
             method: 'put',
             headers: {
                 'Authorization': Auth.getUserToken()
             },
-
         })
         .then(response => checkStatusCode(response))
         .then(response => dispatch(completeAllAction()))
@@ -20,6 +18,5 @@ export const completeAll = (userId) => (dispatch) => {
             throw err;
         });
 };
-
 
 export default completeAll

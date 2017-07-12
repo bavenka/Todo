@@ -22,8 +22,8 @@ import authorization from '../../middleware/authorization'
 
 let router = express.Router();
 
-//TODO Скрыть для безопасности (любой юзер имеет возможность получить всех пользователей)
-router.get('/all', authorization, getTodosController);
+// Скрыт для безопасности (любой юзер имеет возможность получить всех пользователей)
+//router.get('/all', authorization, getTodosController);
 
 router.get('/', authorization, getTodosByUserIdController);
 

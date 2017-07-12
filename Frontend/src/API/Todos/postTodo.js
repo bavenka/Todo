@@ -1,9 +1,11 @@
 import addTodo from '../../actions/addTodoAction'
 import checkStatusCode from '../checkStatusCode'
+import Auth from '../../utils/auth'
+import {SERVER_URL} from "../../constants/ActionTypes";
 
-export const postTodo = (userId, text, completed) => (dispatch) => {
+export const postTodo = (text, completed) => (dispatch) => {
 
-    return fetch(`http://127.0.0.1:3000/api/todo/`,
+    return fetch(SERVER_URL + '/todo',
         {
             method: 'post',
             headers: {
@@ -13,7 +15,6 @@ export const postTodo = (userId, text, completed) => (dispatch) => {
             body: JSON.stringify({
                 'text': text,
                 'completed': completed,
-                'user_id': userId,
             })
         })
         .then(response => checkStatusCode(response))

@@ -1,9 +1,10 @@
 import editTodoAction from '../../actions/editTodoAction'
 import checkStatusCode from '../checkStatusCode'
 import Auth from '../../utils/auth'
-const editTodo = (id, text) => (dispatch) => {
+import {SERVER_URL} from "../../constants/ActionTypes";
 
-    return fetch(`http://127.0.0.1:3000/api/todo/`,
+const editTodo = (id, text) => (dispatch) => {
+    return fetch(SERVER_URL + '/todo/',
         {
             method: 'put',
             headers: {
@@ -24,6 +25,5 @@ const editTodo = (id, text) => (dispatch) => {
             throw err;
         });
 };
-
 
 export default editTodo

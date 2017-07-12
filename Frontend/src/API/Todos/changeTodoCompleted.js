@@ -1,9 +1,10 @@
 import completeTodo from '../../actions/completeTodoAction'
 import checkStatusCode from '../checkStatusCode'
 import Auth from '../../utils/auth'
+import {SERVER_URL} from "../../constants/ActionTypes";
 
 const changeTodoCompleted = (id) => (dispatch) => {
-    return fetch(`http://127.0.0.1:3000/api/todo/changeCompleted/` + id,
+    return fetch(SERVER_URL + '/todo/changeCompleted/' + id,
         {
             method: 'put',
             headers: {

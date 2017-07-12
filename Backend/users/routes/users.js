@@ -22,6 +22,8 @@ import {Secret} from '../../constants/index'
 
 let router = express.Router();
 
+//TODO Добавить валидатор!
+//TODO Разнести по уровням.
 router.post('/authorization', function (req, res, next) {
         let searchParam;
         const email = req.body.email;
@@ -67,8 +69,8 @@ router.post('/authorization', function (req, res, next) {
     }
 );
 
-//TODO Скрыть для безопасности (любой юзер имеет возможность получить всех пользователей)
-router.get('/all', authorization, getUsersController);
+// Скрыт для безопасности (любой юзер имеет возможность получить всех пользователей)
+//router.get('/all', authorization, getUsersController);
 
 router.get('/', authorization, getUserController);
 
