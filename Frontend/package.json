@@ -6,7 +6,9 @@
   "scripts": {
     "start": "webpack-dev-server --content-base ./dist --inline --hot",
     "test": "jest",
-    "test:watch": "npm test -- --watch"
+    "test:watch": "npm test -- --watch",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "author": "",
   "license": "ISC",
@@ -29,6 +31,7 @@
     "style-loader": "^0.18.2"
   },
   "devDependencies": {
+    "@storybook/react": "^3.1.8",
     "babel-cli": "^6.24.1",
     "babel-core": "^6.25.0",
     "babel-jest": "^20.0.3",
