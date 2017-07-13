@@ -17,10 +17,19 @@ import {
 } from '../validators/index'
 
 import User from '../models/user'
-import authorization from '../../middleware/authorization'
+import Authorization from '../../middleware/authorization'
 import {Secret} from '../../constants/index'
 
 let router = express.Router();
+
+const currentRouterUrl = '/api/user';
+
+router.use(Authorization.unless({
+    path: [
+        {url: currentRouterUrl + '/authorization', method: ['POST']},
+        {url: currentRouterUrl, method: ['POST']},
+    ]
+}));
 
 //TODO Добавить валидатор!
 //TODO Разнести по уровням.
@@ -70,21 +79,21 @@ router.post('/authorization', function (req, res, next) {
 );
 
 // Скрыт для безопасности (любой юзер имеет возможность получить всех пользователей)
-//router.get('/all', authorization, getUsersController);
+//router.get('/all', getUsersController);
 
-router.get('/', authorization, getUserController);
+router.get('/', getUserController);
 
-router.get('/email/', authorization, getUserByEmailController);
+router.get('/email/', getUserByEmailController);
 
-router.get('/username/', authorization, getUserByUsernameController);
+router.get('/username/', getUserByUsernameController);
 
 router.post('/', validate(postUserValidator), postUserController);
 
-router.put('/', authorization, validate(putUserValidator), putUserController);
+router.put('/', validate(putUserValidator), putUserController);
 
 /*Delete user by id.*/
-router.delete('/', authorization, deleteUserByIdController);
+router.delete('/', deleteUserByIdController);
 
-router.delete('/email/', authorization, deleteUserByEmailController);
+router.delete('/email/', deleteUserByEmailController);
 
 export default router;

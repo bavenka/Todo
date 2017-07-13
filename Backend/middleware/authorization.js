@@ -1,7 +1,8 @@
 import jwt from 'jsonwebtoken'
 import {Secret} from '../constants/index'
+import unless from 'express-unless'
 
-export default function authorize(req, res, next) {
+function Authorize(req, res, next) {
 
     const token = req.get('Authorization');
 
@@ -21,4 +22,8 @@ export default function authorize(req, res, next) {
             message: 'No token provided.'
         });
     }
-};
+}
+
+Authorize.unless = unless;
+
+export default Authorize
