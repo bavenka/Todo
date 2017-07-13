@@ -22,6 +22,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //TODO соеденить юзера с туду. сделать простойку которая принимает 2 типа и 2 id   и мапит их
 
+//TODO Express-unless либа для путей , по отдельности для каждого модуля
+
+
 app.use(cors());
 
 connect(DB_URL);
