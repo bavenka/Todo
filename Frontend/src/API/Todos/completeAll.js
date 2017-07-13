@@ -3,7 +3,6 @@ import checkStatusCode from '../checkStatusCode'
 import Auth from '../../utils/auth'
 import {SERVER_URL} from "../../constants/ActionTypes";
 
-//TODO передовать user_id текущего пользователя
 export const completeAll = () => (dispatch) => {
     return fetch(SERVER_URL + '/todo/completeAll/',
         {
