@@ -5,7 +5,6 @@ import CompleteAll from '../containers/completeAll'
 class Header extends React.Component {
 
     render() {
-        console.log(this.props);
         return (
             <header>
                 <h1>Todos</h1>

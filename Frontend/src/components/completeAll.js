@@ -1,7 +1,15 @@
 import React from 'react';
 
-const CompleteAll = ({check, onCompleteAllClick}) => (
-    <input type="checkbox" checked={check} onChange={onCompleteAllClick}/>
-);
+class CompleteAll extends React.Component {
+
+    render() {
+        if (this.props.display) {
+            return (  <input type="checkbox" checked={this.props.check} onChange={this.props.onCompleteAllClick}/>);
+        }
+        else {
+            return null;
+        }
+    }
+}
 
 export default CompleteAll

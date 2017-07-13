@@ -4,7 +4,8 @@ import completeAll from '../API/Todos/completeAll';
 
 const mapStateToProps = (state) => {
     return {
-        check: state.todos.every(todo => todo.completed)
+        check: state.todos.every(todo => todo.completed),
+        display: Boolean(state.todos.length),
     }
 };
 

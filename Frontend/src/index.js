@@ -18,6 +18,8 @@ let store = createStore(mainReducer,
         reduxDevtoolsExtension && reduxDevtoolsExtension()
     ));
 
+//TODO buble plagin classpropertis
+
 render(
     <Provider store={store}>
         <BrowserRouter>
