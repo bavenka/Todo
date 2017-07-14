@@ -2,6 +2,7 @@ import React, {PropTypes} from 'react'
 import Counter from '../containers/counter'
 import FilterLink from '../containers/FilterLink'
 import ClearCompleted from  '../containers/clearCompleted'
+import {ALL, ACTIVE, COMPLETED} from '../constants/filterTypes'
 
 class Footer extends React.Component {
 
@@ -12,15 +13,15 @@ class Footer extends React.Component {
                     <Counter/>
                     <p>
                         {"Show: "}
-                        <FilterLink filter="all">
+                        <FilterLink filter={ALL}>
                             All
                         </FilterLink>
                         {", "}
-                        <FilterLink filter="active">
+                        <FilterLink filter={ACTIVE}>
                             Active
                         </FilterLink>
                         {", "}
-                        <FilterLink filter="completed">
+                        <FilterLink filter={COMPLETED}>
                             Completed
                         </FilterLink>
                     </p>

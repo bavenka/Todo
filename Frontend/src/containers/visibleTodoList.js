@@ -4,15 +4,16 @@ import TodoList from '../components/todoList';
 import deleteTodo from '../API/Todos/deleteTodo';
 import completeTodo from '../API/Todos/changeTodoCompleted';
 import editTodo from '../API/Todos/editTodo';
+import {ALL, ACTIVE, COMPLETED} from '../constants/filterTypes';
 
-const getTodos = (todos, filter) => {
+const getTodos = (todos, filter = 'all') => {
     switch (filter) {
-        case 'all':
+        case ALL:
             return todos;
-        case 'completed':
-            return todos.filter(t => t.completed);
-        case 'active':
+        case ACTIVE:
             return todos.filter(t => !t.completed);
+        case COMPLETED:
+            return todos.filter(t => t.completed);
         default:
             throw new Error('Unknown filter: ' + filter)
     }
@@ -20,7 +21,7 @@ const getTodos = (todos, filter) => {
 
 const mapStateToProps = (state, {match}) => {
     return {
-        todos: getTodos(state.todos, match.params.filter || 'all')
+        todos: getTodos(state.todos, match.params.filter)
     }
 };
 
