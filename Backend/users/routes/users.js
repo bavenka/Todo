@@ -14,7 +14,8 @@ import {
 
 import {
     postUserValidator,
-    putUserValidator
+    putUserValidator,
+    authorizationValidator
 } from '../validators/index'
 
 import Authorization from '../../middleware/authorization'
@@ -31,8 +32,7 @@ router.use(Authorization.unless({
 }));
 
 //TODO Добавить валидатор!
-//TODO Разнести по уровням.
-router.post('/authorization', authorizationController);
+router.post('/authorization', validate(authorizationValidator), authorizationController);
 
 // Скрыт для безопасности (любой юзер имеет возможность получить всех пользователей)
 //router.get('/all', getUsersController);
