@@ -31,7 +31,6 @@ router.use(Authorization.unless({
     ]
 }));
 
-//TODO Добавить валидатор!
 router.post('/authorization', validate(authorizationValidator), authorizationController);
 
 // Скрыт для безопасности (любой юзер имеет возможность получить всех пользователей)
