@@ -8,7 +8,6 @@ export const SET_VISIBILITY_FILTER = 'SET_VISIBILITY_FILTER';
 export const CREATE_USER = 'CREATE_USER';
 export const ERROR_GENERATED = 'ERROR_GENERATED';
 //API
-export const REQUEST_TODOS = 'REQUEST_TODOS';
 export const RECEIVE_TODOS = 'RECEIVE_TODOS';
 export const SERVER_URL = 'http://127.0.0.1:3000/api';
 //Sign UP
