@@ -4,12 +4,14 @@ import Header from '../containers/header'
 import VisibleTodoList from '../containers/visibleTodoList'
 import Footer from '../containers/footer'
 import {fetchTodosByUserId} from  '../API/Todos/fetchTodosByUserId'
+import setVisibilityFilter from '../actions/setVisibilityFilter'
 
 class Content extends React.Component {
 
     componentWillMount() {
         const {dispatch} = this.props;
         dispatch(fetchTodosByUserId());
+        dispatch(setVisibilityFilter(this.props.filter));
     }
 
     render() {
@@ -23,4 +25,10 @@ class Content extends React.Component {
     }
 }
 
-export default connect()(Content)
+const mapStateToProps = (state, {match}) => {
+    return {
+        filter: match.params.filter
+    }
+};
+
+export default connect(mapStateToProps)(Content)
