@@ -1,4 +1,4 @@
-import {getUserByEmail, getUserByUsername} from '../../API/userApi'
+import {getUserByEmail, getUserByUsername} from '../../api/userApi'
 import lodash from 'lodash'
 
 async function checkUsernameExists(field, data) {

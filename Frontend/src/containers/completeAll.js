@@ -1,6 +1,6 @@
 import {connect} from 'react-redux';
 import CompleteAllComponents from '../components/completeAll';
-import completeAll from '../API/Todos/completeAll';
+import completeAll from '../api/Todos/completeAll';
 
 const mapStateToProps = (state) => {
     return {

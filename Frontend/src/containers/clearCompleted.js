@@ -1,6 +1,6 @@
 import {connect} from 'react-redux';
 import ClearCompletedComponent from '../components/clearCompleted';
-import clearCompleted from '../API/Todos/clearCompleted'
+import clearCompleted from '../api/Todos/clearCompleted'
 
 const mapStateToProps = (state) => {
     return {

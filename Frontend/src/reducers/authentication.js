@@ -1,4 +1,4 @@
-import {SET_CURRENT_USER} from '../constants/ActionTypes'
+import {SET_CURRENT_USER, REMOVE_CURRENT_USER} from '../constants/ActionTypes'
 
 const auth = (state = {}, action) => {
     switch (action.type) {
@@ -7,6 +7,12 @@ const auth = (state = {}, action) => {
                 id: action.id,
                 username: action.username,
                 email: action.email
+            });
+        case REMOVE_CURRENT_USER:
+            return Object.assign({}, {
+                id: '',
+                username: '',
+                email: ''
             });
         default:
             return state

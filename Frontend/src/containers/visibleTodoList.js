@@ -1,9 +1,9 @@
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom'
 import TodoList from '../components/todoList';
-import deleteTodo from '../API/Todos/deleteTodo';
-import completeTodo from '../API/Todos/changeTodoCompleted';
-import editTodo from '../API/Todos/editTodo';
+import deleteTodo from '../api/Todos/deleteTodo';
+import completeTodo from '../api/Todos/changeTodoCompleted';
+import editTodo from '../api/Todos/editTodo';
 
 const getTodos = (todos, filter) => {
     switch (filter) {

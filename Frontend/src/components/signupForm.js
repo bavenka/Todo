@@ -2,7 +2,7 @@ import React, {PropTypes} from 'react';
 import classnames from 'classnames'
 import validateInput from '../validators/validate/validateInput'
 import {withRouter} from 'react-router-dom'
-import * as userApi from '../API/userApi'
+import * as userApi from '../api/userApi'
 
 import {
     SUCCESS_SIGNUP_MESSAGE,

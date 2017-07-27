@@ -7,7 +7,7 @@ export const CLEAR_COMPLETED = 'CLEAR_COMPLETED';
 export const SET_VISIBILITY_FILTER = 'SET_VISIBILITY_FILTER';
 export const CREATE_USER = 'CREATE_USER';
 export const ERROR_GENERATED = 'ERROR_GENERATED';
-//API
+//api
 export const REQUEST_TODOS = 'REQUEST_TODOS';
 export const RECEIVE_TODOS = 'RECEIVE_TODOS';
 export const SERVER_URL = 'http://127.0.0.1:3000/api';
@@ -23,3 +23,4 @@ export const LOGIN_USER_SUCCESS = 'LOGIN_USER_SUCCESS';
 export const LOGIN_USER_FAILURE = 'LOGIN_USER_FAILURE';
 export const BAD_CREDENTIALS = 'Bad credentials';
 export const SET_CURRENT_USER = 'SET_CURRENT_USER';
+export const REMOVE_CURRENT_USER = 'SET_CURRENT_USER';
