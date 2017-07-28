@@ -1,6 +1,8 @@
 import React, {PropTypes} from 'react';
+import {Field, reduxForm, SubmissionError} from 'redux-form'
 import classnames from 'classnames'
-import validateInput from '../validators/validate/validateInput'
+import validate from '../validators/validate/validateSignupForm'
+import warn from '../validators/validate/warnSignupForm'
 import {withRouter} from 'react-router-dom'
 import * as userApi from '../api/userApi'
 
@@ -11,54 +13,43 @@ import {
     ERROR_TYPE_MESSAGE
 } from '../constants/ActionTypes'
 
+const renderField = ({ input, label, type, meta: { touched, error, warning } }) =>
+    <div className={classnames("form-group", {"has-error":touched && error},{'has-warning': touched && warning})}>
+        <label className="control-label">
+            {label}
+        </label>
+        <div>
+            <input className="form-control"{...input} type={type} />
+            {touched &&
+            ((error &&
+            <span className="help-block">
+          {error}
+        </span>)||
+            (warning &&
+            <span className="help-block">
+              {warning}
+            </span>))}
+        </div>
+    </div>;
+
 class SignupForm extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            user: {
-                username: '',
-                email: '',
-                password: ''
-            },
-            isLoading: false,
-            errors: {}
-        };
-        this.onChange = this.onChange.bind(this);
-        this.onSubmit = this.onSubmit.bind(this);
     }
 
-    /*   async onBlur(event) {
-     this.setState({errors: {}});
-     const field = event.target.name;
-     const value = event.target.value;
-     if (value !== '') {
-     const {errors, isUserExists} = await checkUserExists(field, value);
-     if (isUserExists) {
-     this.setState({errors})
-     }
-     }
-     }*/
 
-    isValid() {
-        const {errors, isValid} = validateInput(this.state.user);
-        if (!isValid) {
-            this.setState({errors})
+   /* static validate(values) {
+        const {error,warning, hasError,hasWarnings} = validateInput(values);
+        if (hasError) {
+            throw new SubmissionError(error);
         }
-        return isValid;
-    }
+        if(hasWarnings) {
+            throw SubmissionWarning
+        }
+    }*/
 
-    onChange(event) {
-        this.setState({errors: {}});
-        const field = event.target.name;
-        const user = this.state.user;
-        user[field] = event.target.value;
-        this.setState({
-            user
-        })
-    }
-
-    conflictCauseDetermination(body) {
+   /* conflictCauseDetermination(body) {
         let cause = null;
         if (body.errmsg.includes('username')) {
             cause = 'username';
@@ -67,9 +58,9 @@ class SignupForm extends React.Component {
             cause = 'email';
         }
         return cause;
-    }
+    }*/
 
-    validateEmailAndUsernameOnUniqueness(data) {
+ /*   validateEmailAndUsernameOnUniqueness(data) {
         let errors = {};
         switch (data) {
             case 'username' :
@@ -83,10 +74,10 @@ class SignupForm extends React.Component {
             default:
                 throw new Error;
         }
-    }
+    }*/
 
 
-    async onSubmit(event) {
+    /*async onSubmit(event) {
         event.preventDefault();
         if (this.isValid()) {
             try {
@@ -112,42 +103,43 @@ class SignupForm extends React.Component {
                 this.props.addFlashMessage(ERROR_TYPE_MESSAGE, 'Message: ' + e.message + '.');
             }
         }
-    }
+    }*/
+
+
+
+   async submit(values) {
+       try {
+           const response = await userApi.saveUser(values);
+           this.props.addFlashMessage(SUCCESS_TYPE_MESSAGE, SUCCESS_SIGNUP_MESSAGE);
+           this.props.history.push("/");
+       }
+       catch (e) {
+           if (e instanceof Response) {
+               let body = await e.json();
+               if (e.status === 409) {
+                   return
+               }
+               else {
+                   this.props.addFlashMessage(ERROR_TYPE_MESSAGE, 'Message: ' + JSON.stringify(body.errors) + '. '
+                       + 'Status Code: ' + body.status + '.');
+                   return;
+               }
+           }
+           this.props.addFlashMessage(ERROR_TYPE_MESSAGE, 'Message: ' + e.message + '.');
+       }
+   }
 
     render() {
-
-        const {errors} = this.state;
-
+        const {handleSubmit, pristine, submitting} = this.props;
+        console.log(pristine);
         return (
-            <form onSubmit={this.onSubmit}>
+            <form onSubmit={handleSubmit(this.submit)}>
                 <h1>Sign Up</h1>
-                <div className={classnames("form-group", {"has-error": errors.username})}>
-                    <label className="control-label">Username</label>
-                    <input type="text" name="username"
-                           value={this.state.user.username}
-                           onChange={this.onChange}
-                           className="form-control"/>
-                    {errors.username && <span className="help-block">{errors.username}</span>}
-                </div>
-                <div className={classnames("form-group", {"has-error": errors.email})}>
-                    <label className="control-label">Email</label>
-                    <input type="email" name="email"
-                           value={this.state.user.email}
-                           onChange={this.onChange}
-                           className="form-control"/>
-                    {errors.email && <span className="help-block">{errors.email}</span>}
-                </div>
-                <div className={classnames("form-group", {"has-error": errors.password})}>
-                    <label className="control-label">Password</label>
-                    <input type="password" name="password"
-                           value={this.state.user.password}
-                           onChange={this.onChange}
-                           className="form-control"/>
-                    {errors.password && <span className="help-block">{errors.password}</span>}
-                </div>
-                <div className="form-group">
-                    <button className="btn btn-primary btn-lg" disabled={this.state.isLoading}>Submit</button>
-                </div>
+                    <Field type="text" name="username" label="Username" component={renderField} />
+                    <Field type="email" name="email" label="Email" component={renderField} />
+                    <Field type="password" name="password" label="Password" component={renderField}/>
+                    <button type="submit" className="btn btn-primary btn-lg" disabled={pristine}>Submit
+                    </button>
             </form>
         )
     }
@@ -161,4 +153,11 @@ SignupForm
     addFlashMessage: PropTypes.func.isRequired
 };
 
+SignupForm = reduxForm({
+    form: 'signup',
+    validate,
+    warn
+})(SignupForm);
+
 export default withRouter(SignupForm);
+

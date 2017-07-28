@@ -6,7 +6,7 @@ import mainReducer from './reducers/mainReducer';
 import {BrowserRouter, Route, Switch} from 'react-router-dom'
 import thunk from 'redux-thunk'
 import App from './components/app';
-import SignupPage from './components/signup'
+import SignupPage from './components/signupPage'
 import LoginPage from './components/loginPage'
 import Content from './components/content'
 

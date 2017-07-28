@@ -1,6 +1,6 @@
 import React, {PropTypes, Component} from 'react';
 import classnames from 'classnames'
-import validateInput from '../validators/validate/validateInput'
+import validateInput from '../validators/validate/validateSignupForm'
 import {ERROR_TYPE_MESSAGE, BAD_CREDENTIALS} from '../constants/ActionTypes'
 import * as userApi from '../api/userApi'
 import {withRouter} from 'react-router-dom'
